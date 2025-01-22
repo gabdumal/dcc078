@@ -1,9 +1,27 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-left to right direction
+'left to right direction
 
 package shipping_package as "Shipping" {
+
+class Order {
+  + proceed(Order order)
+  + cancel(Order order)
+}
+
+Order o--> "1" OrderState : "is in"
+
+abstract class OrderState {
+  + proceed(Order order)
+  + cancel(Order order)
+}
+
+OrderState ...> Order
+
+class PendingOrderState extends OrderState {
+
+}
 
 }
 
