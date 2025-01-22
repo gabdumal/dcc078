@@ -1,12 +1,22 @@
 @startuml
 'https://plantuml.com/state'-diagram
 
-[*] --> State1
-State1 --> [*]
-State1 : this is a string
-State1 : this is another string
+hide empty description
 
-State1 -> State2
-State2 --> [*]
+[*] --> Pending
+
+Pending --> Processing : Confirm payment
+Pending --> Cancelled : Cancel order
+
+Processing --> Shipped : Ship order
+Processing --> Cancelled : Cancel order
+
+Shipped --> Delivered : Deliver order
+Shipped --> Cancelled : Request return
+
+Delivered --> Cancelled : Request refund
+
+Delivered --> [*]
+Cancelled --> [*]
 
 @enduml
