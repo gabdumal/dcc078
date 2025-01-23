@@ -36,4 +36,10 @@ public class ProcessingOrder
         return true;
     }
 
+    @Override
+    public boolean cancel(Order order) {
+        order.setState(CancelledOrder.getInstance());
+        return true;
+    }
+
 }

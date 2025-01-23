@@ -9,20 +9,26 @@ package assignments.shipping.orderState;
 import assignments.shipping.Order;
 import assignments.shipping.OrderStateEnum;
 
-public class CancelledOrder
+public class ReturnedOrder
         extends OrderState {
 
-    private static final CancelledOrder instance = new CancelledOrder();
+    private static final ReturnedOrder instance = new ReturnedOrder(false);
+    private              boolean       hasShipped;
 
-    private CancelledOrder() {
+    private ReturnedOrder(boolean hasShipped) {
+        this.hasShipped = hasShipped;
     }
 
-    public static CancelledOrder getInstance() {
-        return CancelledOrder.instance;
+    public static ReturnedOrder getInstance() {
+        return ReturnedOrder.instance;
+    }
+
+    public void setHasShipped(boolean hasShipped) {
+        this.hasShipped = hasShipped;
     }
 
     public OrderStateEnum getState() {
-        return OrderStateEnum.CANCELLED;
+        return OrderStateEnum.RETURNED;
     }
 
     @Override

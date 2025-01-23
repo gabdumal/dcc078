@@ -12,11 +12,12 @@ Processing --> Shipped : Ship order
 Processing --> Cancelled : Cancel order
 
 Shipped --> Delivered : Deliver order
-Shipped --> Cancelled : Request return
+Shipped --> Returned : Return to store
 
-Delivered --> Cancelled : Request refund
+Delivered --> Returned : Request refund
 
 Delivered --> [*]
 Cancelled --> [*]
+Returned --> [*]
 
 @enduml

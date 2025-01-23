@@ -33,7 +33,13 @@ public class ShippedOrder
 
     @Override
     public double getPaidValue(Order order) {
-        return 0;
+        return order.getOriginalPrice() + order.getOriginalShippingFee();
+    }
+
+    @Override
+    public boolean deliver(Order order) {
+        order.setState(DeliveredOrder.getInstance());
+        return true;
     }
 
 }

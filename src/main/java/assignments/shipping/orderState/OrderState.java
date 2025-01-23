@@ -19,6 +19,10 @@ public abstract class OrderState {
         return false;
     }
 
+    public boolean cancel(Order order) {
+        return false;
+    }
+
     public boolean ship(Order order) {
         return false;
     }
@@ -27,7 +31,7 @@ public abstract class OrderState {
         return false;
     }
 
-    public boolean cancel(Order order) {
+    public boolean returnToStore(Order order) {
         return false;
     }
 

@@ -12,6 +12,6 @@ public enum OrderStateEnum {
     PROCESSING,
     SHIPPED,
     DELIVERED,
-    CANCELLED
-
+    CANCELLED,
+    RETURNED
 }
