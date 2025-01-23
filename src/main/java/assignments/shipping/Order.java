@@ -28,4 +28,20 @@ public class Order {
         return this.state.getPaidValue(this);
     }
 
+    public double getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(double originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
+    public double getOriginalShippingFee() {
+        return originalShippingFee;
+    }
+
+    public void setOriginalShippingFee(double originalShippingFee) {
+        this.originalShippingFee = originalShippingFee;
+    }
+
 }

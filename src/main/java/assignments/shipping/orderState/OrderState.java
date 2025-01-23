@@ -19,7 +19,11 @@ public abstract class OrderState {
         return false;
     }
 
-    public boolean confirm(Order order) {
+    public boolean ship(Order order) {
+        return false;
+    }
+
+    public boolean deliver(Order order) {
         return false;
     }
 
