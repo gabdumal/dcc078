@@ -8,10 +8,10 @@ package assignments.shipping;
 
 public class Order {
 
-    private final String     code;
-    private final double     price;
-    private final double     shippingFee;
-    private       OrderState state;
+    private final String code;
+    private final double price;
+    private final double shippingFee;
+    private OrderState state;
 
     public Order(
             String code,
@@ -22,6 +22,10 @@ public class Order {
         this.price       = price;
         this.shippingFee = shippingFee;
         this.state       = PendingOrder.getInstance();
+    }
+
+    public OrderState getState() {
+        return state;
     }
 
     public void setState(OrderState orderState) {
