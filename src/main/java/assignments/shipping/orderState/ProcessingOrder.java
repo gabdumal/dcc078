@@ -27,18 +27,18 @@ public class ProcessingOrder
 
     @Override
     public double getPaidValue(Order order) {
-        return order.getOriginalPrice() + order.getOriginalShippingFee();
-    }
-
-    @Override
-    public boolean ship(Order order) {
-        order.setState(ShippedOrder.getInstance());
-        return true;
+        return order.getPrice() + order.getShippingFee();
     }
 
     @Override
     public boolean cancel(Order order) {
         order.setState(CancelledOrder.getInstance());
+        return true;
+    }
+
+    @Override
+    public boolean ship(Order order) {
+        order.setState(ShippedOrder.getInstance());
         return true;
     }
 

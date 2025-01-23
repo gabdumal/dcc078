@@ -33,7 +33,7 @@ public class ShippedOrder
 
     @Override
     public double getPaidValue(Order order) {
-        return order.getOriginalPrice() + order.getOriginalShippingFee();
+        return order.getPrice() + order.getShippingFee();
     }
 
     @Override

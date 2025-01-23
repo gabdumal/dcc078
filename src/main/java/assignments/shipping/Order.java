@@ -11,13 +11,20 @@ import assignments.shipping.orderState.PendingOrder;
 
 public class Order {
 
-    OrderState state;
-    private String code;
-    private double originalPrice;
-    private double originalShippingFee;
+    private final String     code;
+    private final double     price;
+    private final double     shippingFee;
+    private       OrderState state;
 
-    public Order() {
-        this.state = PendingOrder.getInstance();
+    public Order(
+            String code,
+            double price,
+            double shippingFee
+    ) {
+        this.code        = code;
+        this.price       = price;
+        this.shippingFee = shippingFee;
+        this.state       = PendingOrder.getInstance();
     }
 
     public void setState(OrderState orderState) {
@@ -28,20 +35,16 @@ public class Order {
         return this.state.getPaidValue(this);
     }
 
-    public double getOriginalPrice() {
-        return originalPrice;
+    public double getPrice() {
+        return price;
     }
 
-    public void setOriginalPrice(double originalPrice) {
-        this.originalPrice = originalPrice;
+    public double getShippingFee() {
+        return shippingFee;
     }
 
-    public double getOriginalShippingFee() {
-        return originalShippingFee;
-    }
-
-    public void setOriginalShippingFee(double originalShippingFee) {
-        this.originalShippingFee = originalShippingFee;
+    public String getCode() {
+        return code;
     }
 
 }

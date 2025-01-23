@@ -12,19 +12,13 @@ import assignments.shipping.OrderStateEnum;
 public class DeliveredOrder
         extends OrderState {
 
-    private static final DeliveredOrder instance = new DeliveredOrder(false);
-    private              boolean        hasShipped;
+    private static final DeliveredOrder instance = new DeliveredOrder();
 
-    private DeliveredOrder(boolean hasShipped) {
-        this.hasShipped = hasShipped;
+    private DeliveredOrder() {
     }
 
     public static DeliveredOrder getInstance() {
         return DeliveredOrder.instance;
-    }
-
-    public void setHasShipped(boolean hasShipped) {
-        this.hasShipped = hasShipped;
     }
 
     public OrderStateEnum getState() {
@@ -33,7 +27,13 @@ public class DeliveredOrder
 
     @Override
     public double getPaidValue(Order order) {
-        return 0;
+        return order.getPrice() + order.getShippingFee();
+    }
+
+    @Override
+    public boolean returnToStore(Order order) {
+        order.setState(ReturnedOrder.getInstance());
+        return true;
     }
 
 }
