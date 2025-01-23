@@ -6,9 +6,6 @@
 
 package assignments.shipping;
 
-import assignments.shipping.orderState.OrderState;
-import assignments.shipping.orderState.PendingOrder;
-
 public class Order {
 
     private final String     code;
@@ -31,8 +28,8 @@ public class Order {
         this.state = orderState;
     }
 
-    public double getPaidValue() {
-        return this.state.getPaidValue(this);
+    public String getCode() {
+        return code;
     }
 
     public double getPrice() {
@@ -43,8 +40,28 @@ public class Order {
         return shippingFee;
     }
 
-    public String getCode() {
-        return code;
+    public double getPaidValue() {
+        return this.state.getPaidValue(this);
+    }
+
+    public boolean pay() {
+        return this.state.pay(this);
+    }
+
+    public boolean cancel() {
+        return this.state.cancel(this);
+    }
+
+    public boolean ship() {
+        return this.state.ship(this);
+    }
+
+    public boolean deliver() {
+        return this.state.deliver(this);
+    }
+
+    public boolean returnToStore() {
+        return this.state.returnToStore(this);
     }
 
 }
