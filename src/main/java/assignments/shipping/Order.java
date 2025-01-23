@@ -6,12 +6,15 @@
 
 package assignments.shipping;
 
+import assignments.shipping.orderState.OrderState;
+import assignments.shipping.orderState.PendingOrder;
+
 public class Order {
 
     OrderState state;
     private String code;
-    private double price;
-    private double shippingFee;
+    private double originalPrice;
+    private double originalShippingFee;
 
     public Order() {
         this.state = PendingOrder.getInstance();
@@ -19,6 +22,10 @@ public class Order {
 
     public void setState(OrderState orderState) {
         this.state = orderState;
+    }
+
+    public double getPaidValue() {
+        return this.state.getPaidValue(this);
     }
 
 }
