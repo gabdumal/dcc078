@@ -8,12 +8,17 @@ package assignments.shipping;
 
 public class Order {
 
+    OrderState state;
     private String code;
     private double price;
     private double shippingFee;
 
-    public Order(String code, double price, double shippingFee) {
+    public Order() {
+        this.state = PendingOrder.getInstance();
+    }
 
+    public void setState(OrderState orderState) {
+        this.state = orderState;
     }
 
 }

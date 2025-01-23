@@ -21,4 +21,5 @@ public abstract class OrderState {
     public boolean cancel(Order order) {
         return false;
     }
+
 }
