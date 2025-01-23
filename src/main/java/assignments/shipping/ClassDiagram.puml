@@ -29,8 +29,8 @@ Order o--> "1" OrderState : "is in"
 
 abstract class OrderState {
     + {abstract} getState() : OrderStateEnum
-    + {abstract} getPaidValue(Order order) : double
 
+    + {abstract} getPaidValue(Order order) : double
     + pay(Order order) : boolean
     + cancel(Order order) : boolean
     + ship(Order order) : boolean
