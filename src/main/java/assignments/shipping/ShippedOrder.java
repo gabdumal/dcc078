@@ -39,4 +39,10 @@ public class ShippedOrder
         return true;
     }
 
+    @Override
+    public boolean returnToStore(Order order) {
+        order.setState(ReturnedOrder.getInstance());
+        return true;
+    }
+
 }

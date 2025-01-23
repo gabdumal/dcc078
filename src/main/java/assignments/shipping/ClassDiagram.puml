@@ -6,21 +6,105 @@
 package shipping_package as "Shipping" {
 
 class Order {
-  + proceed(Order order)
-  + cancel(Order order)
+    - {final} String code
+    - {final} double price
+    - {final} double shippingFee
+
+    + getState() : OrderState
+    + setState(OrderState orderState) : void
+
+    + getCode() : String
+    + getPrice() : double
+    + getShippingFee() : double
+    + getPaidValue() : double
+
+    + pay() : boolean
+    + cancel() : boolean
+    + ship() : boolean
+    + deliver() : boolean
+    + returnToStore() : boolean
 }
 
 Order o--> "1" OrderState : "is in"
 
 abstract class OrderState {
-  + proceed(Order order)
-  + cancel(Order order)
+    + {abstract} getState() : OrderStateEnum
+    + {abstract} getPaidValue(Order order) : double
+
+    + pay(Order order) : boolean
+    + cancel(Order order) : boolean
+    + ship(Order order) : boolean
+    + deliver(Order order) : boolean
+    + returnToStore(Order order) : boolean
 }
 
 OrderState ...> Order
 
-class PendingOrderState extends OrderState {
+class PendingOrder extends OrderState {
+    - {static} {final} PendingOrder instance
 
+    - PendingOrder()
+    + {static} getInstance() : PendingOrder
+    + getState() : OrderStateEnum
+
+    + getPaidValue(OrderState orderState) : double
+    + pay(OrderState orderState) : boolean
+    + cancel(OrderState orderState) : boolean
+}
+
+class ProcessingOrder extends OrderState {
+    - {static} {final} ProcessingOrder instance
+
+    - ProcessingOrder()
+    + {static} getInstance() : ProcessingOrder
+    + getState() : OrderStateEnum
+
+    + getPaidValue(OrderState orderState) : double
+    + ship(OrderState orderState) : boolean
+    + cancel(OrderState orderState) : boolean
+}
+
+class ShippedOrder extends OrderState {
+    - {static} {final} ShippedOrder instance
+
+    - ShippedOrder()
+    + {static} getInstance() : ShippedOrder
+    + getState() : OrderStateEnum
+
+    + getPaidValue(OrderState orderState) : double
+    + deliver(OrderState orderState) : boolean
+    + returnToStore(OrderState orderState) : boolean
+}
+
+class DeliveredOrder extends OrderState {
+    - {static} {final} DeliveredOrder instance
+
+    - DeliveredOrder()
+    + {static} getInstance() : DeliveredOrder
+    + getState() : OrderStateEnum
+
+    + getPaidValue(OrderState orderState) : double
+    + returnToStore(OrderState orderState) : boolean
+}
+
+class CancelledOrder extends OrderState {
+    - {static} {final} CancelledOrder instance
+
+    - CancelledOrder()
+    + {static} getInstance() : CancelledOrder
+    + getState() : OrderStateEnum
+
+    + getPaidValue(OrderState orderState) : double
+}
+
+class ReturnedOrder extends OrderState {
+    - {static} {final} ReturnedOrder instance
+
+    - ReturnedOrder()
+    + {static} getInstance() : ReturnedOrder
+    + getState() : OrderStateEnum
+
+    + getPaidValue(OrderState orderState) : double
 }
 
 }
