@@ -3,4 +3,15 @@
 
 hide empty description
 
+[*] --> Disarmed
+
+Disarmed --> Armed : User turns the system on
+
+Armed --> Triggered : Sensor triggers the alarm
+Armed --> Disarmed: User turns the system off
+
+Triggered --> Armed : User resets the alarm
+
+Disarmed --> [*]
+
 @enduml

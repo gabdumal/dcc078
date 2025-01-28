@@ -1,6 +1,13 @@
-# DCC078 Aspectos Avançados em Engenharia de Software
+# DCC078 Aspectos Avançados em Engenharia de Software - Observer e State
 
-Atividades realizadas para a disciplina **DCC078** Aspectos Avançados em Engenharia de Software.
+Atividade realizada para a disciplina **DCC078** Aspectos Avançados em Engenharia de Software.
 
-Este repositório contém todas as atividades.
-Cada uma, na data de seu término, será separada por meio de um _fork_.
+Este repositório utiliza os padrões Observer e State.
+
+## Diagrama de estado
+
+![Diagrama de estado](./src/main/java/assignments/sensors/StateDiagram.png)
+
+## Diagrama de classe
+
+![Diagrama de classe](./src/main/java/assignments/sensors/ClassDiagram.png)
