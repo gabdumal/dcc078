@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/state'-diagram
+
+hide empty description
+
+[*] --> Pending
+
+Pending --> Processing : Confirm payment
+Pending --> Cancelled : Cancel order
+
+Processing --> Shipped : Ship order
+Processing --> Cancelled : Cancel order
+
+Shipped --> Delivered : Deliver order
+Shipped --> Returned : Return to store
+
+Delivered --> Returned : Request refund
+
+Delivered --> [*]
+Cancelled --> [*]
+Returned --> [*]
+
+@enduml
