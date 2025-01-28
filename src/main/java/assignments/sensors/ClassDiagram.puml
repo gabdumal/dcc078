@@ -5,6 +5,34 @@
 
 package sensors_package as "Sensors" {
 
+enum SensorStateEnum {
+    DISARMED
+    ARMED
+    TRIGGERED
+}
+
+class Sensor extends Observable {
+    + arm(Sensor sensor) : boolean
+    + trigger(Sensor sensor) : boolean
+    + reset(Sensor sensor) : boolean
+    + disarm(Sensor sensor) : boolean
+}
+
+abstract class SensorState {
+    + getState() : SensorStateEnum
+
+    + arm(Sensor sensor) : boolean
+    + trigger(Sensor sensor) : boolean
+    + reset(Sensor sensor) : boolean
+    + disarm(Sensor sensor) : boolean
+}
+
+class SmartLight implements Observer {
+    - boolean isOn
+
+    + update(Observable sensor, Object argument) : void
+}
+
 }
 
 @enduml
