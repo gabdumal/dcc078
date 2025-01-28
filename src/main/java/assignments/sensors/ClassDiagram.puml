@@ -27,7 +27,8 @@ abstract class SensorState {
     + disarm(Sensor sensor) : boolean
 }
 
-class SmartLight implements Observer {
+class SecurityAlarm implements Observer {
+    - String location
     - boolean isOn
 
     + update(Observable sensor, Object argument) : void
