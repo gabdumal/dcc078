@@ -1,0 +1,85 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'left to right direction
+
+package sensors_package as "Sensors" {
+
+enum SensorStateEnum {
+    DISARMED
+    ARMED
+    TRIGGERED
+}
+
+class Sensor extends Observable {
+    - SensorState state
+
+    + Sensor()
+    + getState() : SensorState
+    + setState(SensorState state) : void
+    - notifyAlarms(boolean on) : void
+
+    + arm(Sensor sensor) : boolean
+    + trigger(Sensor sensor) : boolean
+    + reset(Sensor sensor) : boolean
+    + disarm(Sensor sensor) : boolean
+}
+
+abstract class SensorState {
+    + getState() : SensorStateEnum
+
+    + arm(Sensor sensor) : boolean
+    + trigger(Sensor sensor) : boolean
+    + reset(Sensor sensor) : boolean
+    + disarm(Sensor sensor) : boolean
+}
+
+class ArmedSensor extends SensorState {
+    - {static} {final} ArmedSensor instance
+
+    - ArmedSensor()
+    + getInstance() : ArmedSensor
+    + getState() : SensorStateEnum
+
+    + trigger(Sensor sensor) : boolean
+    + disarm(Sensor sensor) : boolean
+}
+
+class DisarmedSensor extends SensorState {
+    - {static} {final} DisarmedSensor instance
+
+    - DisarmedSensor()
+    + getInstance() : DisarmedSensor
+    + getState() : SensorStateEnum
+
+    + arm(Sensor sensor) : boolean
+}
+
+class TriggeredSensor extends SensorState {
+    - {static} {final} TriggeredSensor instance
+
+    - TriggeredSensor()
+    + getInstance() : TriggeredSensor
+    + getState() : SensorStateEnum
+
+    + reset(Sensor sensor) : boolean
+}
+
+class SecurityAlarm implements Observer {
+    - String location
+    - boolean isOn
+
+    + SecurityAlarm(String location)
+
+    + getLocation() : String
+    + setLocation(String location) : void
+    + isOn() : boolean
+    + setOn(boolean on) : void
+
+    + register(Sensor sensor) : void
+    + update(Observable sensor, Object argument) : void
+}
+
+}
+
+@enduml
