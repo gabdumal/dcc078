@@ -12,6 +12,12 @@ enum SensorStateEnum {
 }
 
 class Sensor extends Observable {
+    - SensorState state
+
+    + Sensor()
+    + getState() : SensorState
+    + setState(SensorState state) : void
+
     + arm(Sensor sensor) : boolean
     + trigger(Sensor sensor) : boolean
     + reset(Sensor sensor) : boolean
@@ -27,9 +33,44 @@ abstract class SensorState {
     + disarm(Sensor sensor) : boolean
 }
 
+class ArmedSensor extends SensorState {
+    - {static} {final} ArmedSensor instance
+
+    - ArmedSensor()
+    + getInstance() : ArmedSensor
+    + getState() : SensorStateEnum
+
+    + trigger(Sensor sensor) : boolean
+    + disarm(Sensor sensor) : boolean
+}
+
+class DisarmedSensor extends SensorState {
+    - {static} {final} DisarmedSensor instance
+
+    - DisarmedSensor()
+    + getInstance() : DisarmedSensor
+    + getState() : SensorStateEnum
+
+    + arm(Sensor sensor) : boolean
+}
+
+class TriggeredSensor extends SensorState {
+    - {static} {final} TriggeredSensor instance
+
+    - TriggeredSensor()
+    + getInstance() : TriggeredSensor
+    + getState() : SensorStateEnum
+
+    + reset(Sensor sensor) : boolean
+}
+
 class SecurityAlarm implements Observer {
     - String location
     - boolean isOn
+
+    + SecurityAlarm(String location)
+
+    + getLocation(
 
     + update(Observable sensor, Object argument) : void
 }
