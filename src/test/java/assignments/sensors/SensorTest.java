@@ -99,4 +99,42 @@ public class SensorTest {
         assertFalse(this.securityAlarm.isOn());
     }
 
+    /* TriggeredSensor */
+
+    @Test
+    public void shouldNotArmTriggeredSensor() {
+        this.sensor.setState(TriggeredSensor.getInstance());
+
+        assertFalse(this.sensor.arm());
+        assertEquals(TriggeredSensor.getInstance(), this.sensor.getState());
+        assertTrue(this.securityAlarm.isOn());
+    }
+
+    @Test
+    public void shouldNotTriggerTriggeredSensor() {
+        this.sensor.setState(TriggeredSensor.getInstance());
+
+        assertFalse(this.sensor.trigger());
+        assertEquals(TriggeredSensor.getInstance(), this.sensor.getState());
+        assertTrue(this.securityAlarm.isOn());
+    }
+
+    @Test
+    public void shouldResetTriggeredSensor() {
+        this.sensor.setState(TriggeredSensor.getInstance());
+
+        assertTrue(this.sensor.reset());
+        assertEquals(ArmedSensor.getInstance(), this.sensor.getState());
+        assertFalse(this.securityAlarm.isOn());
+    }
+
+    @Test
+    public void shouldNotDisarmTriggeredSensor() {
+        this.sensor.setState(TriggeredSensor.getInstance());
+
+        assertFalse(this.sensor.disarm());
+        assertEquals(TriggeredSensor.getInstance(), this.sensor.getState());
+        assertTrue(this.securityAlarm.isOn());
+    }
+
 }

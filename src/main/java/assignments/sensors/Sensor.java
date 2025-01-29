@@ -23,6 +23,12 @@ public class Sensor
 
     public void setState(SensorState state) {
         this.state = state;
+        this.notifyAlarms(state == TriggeredSensor.getInstance());
+    }
+
+    private void notifyAlarms(boolean on) {
+        this.setChanged();
+        this.notifyObservers(on);
     }
 
     public boolean arm() {
@@ -32,8 +38,7 @@ public class Sensor
     public boolean trigger() {
         var couldTrigger = this.state.trigger(this);
         if (couldTrigger) {
-            this.setChanged();
-            this.notifyObservers(true);
+            this.notifyAlarms(true);
         }
         return couldTrigger;
     }
@@ -41,8 +46,7 @@ public class Sensor
     public boolean reset() {
         var couldReset = this.state.reset(this);
         if (couldReset) {
-            this.setChanged();
-            this.notifyObservers(false);
+            this.notifyAlarms(false);
         }
         return couldReset;
     }
