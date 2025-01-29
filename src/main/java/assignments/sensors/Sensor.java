@@ -31,15 +31,19 @@ public class Sensor
 
     public boolean trigger() {
         var couldTrigger = this.state.trigger(this);
-        this.setChanged();
-        this.notifyObservers(true);
+        if (couldTrigger) {
+            this.setChanged();
+            this.notifyObservers(true);
+        }
         return couldTrigger;
     }
 
     public boolean reset() {
         var couldReset = this.state.reset(this);
-        this.setChanged();
-        this.notifyObservers(false);
+        if (couldReset) {
+            this.setChanged();
+            this.notifyObservers(false);
+        }
         return couldReset;
     }
 

@@ -35,6 +35,10 @@ public class SecurityAlarm
         isOn = on;
     }
 
+    public void register(Sensor sensor) {
+        sensor.addObserver(this);
+    }
+
     @Override
     public void update(Observable sensor, Object on) {
         if (on instanceof Boolean) {
