@@ -70,8 +70,12 @@ class SecurityAlarm implements Observer {
 
     + SecurityAlarm(String location)
 
-    + getLocation(
+    + getLocation() : String
+    + setLocation(String location) : void
+    + isOn() : boolean
+    + setOn(boolean on) : void
 
+    + register(Sensor sensor) : void
     + update(Observable sensor, Object argument) : void
 }
 
