@@ -6,16 +6,20 @@
 
 package assignments.sensors;
 
-import java.util.Observable;
+public class DisarmedSensor
+        extends SensorState {
 
-public class Sensor
-        extends Observable {
-
-    private SensorState state;
-
-    public Sensor(){
-        this.state =DisarmedSensor
+    private DisarmedSensor() {
     }
 
+    ;
+    private static DisarmedSensor instance = new DisarmedSensor();
+
+    public static DisarmedSensor getInstance()
+
+    @Override
+    public SensorStateEnum getState() {
+        return SensorStateEnum.DISARMED;
+    }
 
 }

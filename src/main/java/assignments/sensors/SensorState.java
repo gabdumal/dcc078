@@ -8,4 +8,22 @@ package assignments.sensors;
 
 public abstract class SensorState {
 
+    public abstract SensorStateEnum getState();
+
+    public boolean arm(Sensor sensor) {
+        return false;
+    }
+
+    public boolean trigger(Sensor sensor) {
+        return false;
+    }
+
+    public boolean reset(Sensor sensor) {
+        return false;
+    }
+
+    public boolean disarm(Sensor sensor) {
+        return false;
+    }
+
 }
