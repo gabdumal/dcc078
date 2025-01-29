@@ -137,4 +137,46 @@ public class SensorTest {
         assertTrue(this.securityAlarm.isOn());
     }
 
+    /* SecurityAlarm */
+
+    @Test
+    public void shouldBeInitiallyOff() {
+        assertFalse(this.securityAlarm.isOn());
+        assertEquals(DisarmedSensor.getInstance(), this.sensor.getState());
+    }
+
+    @Test
+    public void shouldBeOffWhenArmed() {
+        this.sensor.arm();
+        assertFalse(this.securityAlarm.isOn());
+        assertEquals(ArmedSensor.getInstance(), this.sensor.getState());
+    }
+
+    @Test
+    public void shouldBeOnWhenArmedAndTriggered() {
+        this.sensor.arm();
+        this.sensor.trigger();
+        assertTrue(this.securityAlarm.isOn());
+        assertEquals(TriggeredSensor.getInstance(), this.sensor.getState());
+    }
+
+    @Test
+    public void shouldBeOffWhenArmedAndTriggeredAndReset() {
+        this.sensor.arm();
+        this.sensor.trigger();
+        this.sensor.reset();
+        assertFalse(this.securityAlarm.isOn());
+        assertEquals(ArmedSensor.getInstance(), this.sensor.getState());
+    }
+
+    @Test
+    public void shouldBeOffWhenArmedAndTriggeredAndResetAndDisarmed() {
+        this.sensor.arm();
+        this.sensor.trigger();
+        this.sensor.reset();
+        this.sensor.disarm();
+        assertFalse(this.securityAlarm.isOn());
+        assertEquals(DisarmedSensor.getInstance(), this.sensor.getState());
+    }
+
 }
