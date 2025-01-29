@@ -6,26 +6,32 @@
 
 package assignments.sensors;
 
-public class DisarmedSensor
+public class ArmedSensor
         extends SensorState {
 
-    private static final DisarmedSensor instance = new DisarmedSensor();
+    private static final ArmedSensor instance = new ArmedSensor();
 
-    private DisarmedSensor() {
+    private ArmedSensor() {
     }
 
-    public static DisarmedSensor getInstance() {
+    public static ArmedSensor getInstance() {
         return instance;
     }
 
     @Override
     public SensorStateEnum getState() {
-        return SensorStateEnum.DISARMED;
+        return SensorStateEnum.ARMED;
     }
 
     @Override
-    public boolean arm(Sensor sensor) {
-        sensor.setState(ArmedSensor.getInstance());
+    public boolean trigger(Sensor sensor) {
+        sensor.setState(TriggeredSensor.getInstance());
+        return true;
+    }
+
+    @Override
+    public boolean disarm(Sensor sensor) {
+        sensor.setState(DisarmedSensor.getInstance());
         return true;
     }
 

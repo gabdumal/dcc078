@@ -13,9 +13,32 @@ public class Sensor
 
     private SensorState state;
 
-    public Sensor(){
-        this.state =DisarmedSensor
+    public Sensor() {
+        this.state = DisarmedSensor.getInstance();
     }
 
+    public SensorState getState() {
+        return this.state;
+    }
+
+    public void setState(SensorState state) {
+        this.state = state;
+    }
+
+    public boolean arm() {
+        return this.state.arm(this);
+    }
+
+    public boolean trigger() {
+        return this.state.trigger(this);
+    }
+
+    public boolean reset() {
+        return this.state.reset(this);
+    }
+
+    public boolean disarm() {
+        return this.state.disarm(this);
+    }
 
 }
