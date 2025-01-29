@@ -6,6 +6,59 @@
 
 package assignments.sensors;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 public class SensorTest {
+
+    private Sensor sensor;
+    private SecurityAlarm securityAlarm;
+
+    @BeforeEach
+    public void setUp() {
+        this.sensor = new Sensor();
+        this.securityAlarm = new SecurityAlarm("Cozinha");
+        this.securityAlarm.register(this.sensor);
+    }
+
+    /* DisarmedSensor */
+
+    @Test
+    public void shouldArmDisarmedSensor() {
+        this.sensor.setState(DisarmedSensor.getInstance());
+
+        assertTrue(this.sensor.arm());
+        assertEquals(ArmedSensor.getInstance(), this.sensor.getState());
+        assertFalse(this.securityAlarm.isOn());
+    }
+
+    @Test
+    public void shouldNotTriggerDisarmedSensor() {
+        this.sensor.setState(DisarmedSensor.getInstance());
+
+        assertFalse(this.sensor.trigger());
+        assertEquals(DisarmedSensor.getInstance(), this.sensor.getState());
+        assertFalse(this.securityAlarm.isOn());
+    }
+
+    @Test
+    public void shouldNotResetDisarmedSensor() {
+        this.sensor.setState(DisarmedSensor.getInstance());
+
+        assertFalse(this.sensor.reset());
+        assertEquals(DisarmedSensor.getInstance(), this.sensor.getState());
+        assertFalse(this.securityAlarm.isOn());
+    }
+
+    @Test
+    public void shouldNotDisarmDisarmedSensor() {
+        this.sensor.setState(DisarmedSensor.getInstance());
+
+        assertFalse(this.sensor.disarm());
+        assertEquals(DisarmedSensor.getInstance(), this.sensor.getState());
+        assertFalse(this.securityAlarm.isOn());
+    }
 
 }
