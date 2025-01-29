@@ -36,19 +36,11 @@ public class Sensor
     }
 
     public boolean trigger() {
-        var couldTrigger = this.state.trigger(this);
-        if (couldTrigger) {
-            this.notifyAlarms(true);
-        }
-        return couldTrigger;
+        return this.state.trigger(this);
     }
 
     public boolean reset() {
-        var couldReset = this.state.reset(this);
-        if (couldReset) {
-            this.notifyAlarms(false);
-        }
-        return couldReset;
+        return this.state.reset(this);
     }
 
     public boolean disarm() {

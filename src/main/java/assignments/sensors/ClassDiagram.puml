@@ -17,6 +17,7 @@ class Sensor extends Observable {
     + Sensor()
     + getState() : SensorState
     + setState(SensorState state) : void
+    - notifyAlarms(boolean on) : void
 
     + arm(Sensor sensor) : boolean
     + trigger(Sensor sensor) : boolean
