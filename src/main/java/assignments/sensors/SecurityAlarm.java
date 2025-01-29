@@ -12,12 +12,34 @@ import java.util.Observer;
 public class SecurityAlarm
         implements Observer {
 
-    @Override
-    public void update(
-            Observable sensor,
-            Object argumento
-    ) {
+    private boolean isOn = false;
+    private String location;
 
+    public SecurityAlarm(String location) {
+        this.location = location;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public boolean isOn() {
+        return isOn;
+    }
+
+    public void setOn(boolean on) {
+        isOn = on;
+    }
+
+    @Override
+    public void update(Observable sensor, Object on) {
+        if (on instanceof Boolean) {
+            this.isOn = (Boolean) on;
+        }
     }
 
 }

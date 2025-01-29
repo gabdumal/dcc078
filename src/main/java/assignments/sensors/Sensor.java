@@ -30,11 +30,17 @@ public class Sensor
     }
 
     public boolean trigger() {
-        return this.state.trigger(this);
+        var couldTrigger = this.state.trigger(this);
+        this.setChanged();
+        this.notifyObservers(true);
+        return couldTrigger;
     }
 
     public boolean reset() {
-        return this.state.reset(this);
+        var couldReset = this.state.reset(this);
+        this.setChanged();
+        this.notifyObservers(false);
+        return couldReset;
     }
 
     public boolean disarm() {
