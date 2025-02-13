@@ -8,10 +8,15 @@ package assignments.customer.request;
 
 public class Request {
 
-    private RequestType requestType;
+    private final String      description;
+    private       RequestType requestType;
 
-    public Request(RequestType requestType) {
+    public Request(
+            RequestType requestType,
+            String description
+    ) {
         this.requestType = requestType;
+        this.description = description;
     }
 
     public RequestType getType() {

@@ -6,20 +6,25 @@
 
 package assignments.customer.agent;
 
-import assignments.customer.request.Complaint;
+import assignments.customer.request.Question;
 import assignments.customer.request.Request;
+import assignments.customer.request.UpdateInformation;
 
-public class Chatbot
+public class Attendant
         extends Agent {
 
-    public Chatbot(Agent superiorAgent) {
-        this.requestsList.add(Complaint.getComplaint());
+    public Attendant(Agent superiorAgent) {
+        this.requestsList.add(Question.getQuestion());
+        this.requestsList.add(UpdateInformation.getUpdateInformation());
         this.setSuperiorAgent(superiorAgent);
     }
 
     public String respond(Request request) {
-        if (request.getType() == Complaint.getComplaint()) {
-            return "Your complaint has been registered.";
+        if (request.getType() == Question.getQuestion()) {
+            return "[Answer to the question].";
+        }
+        else if (request.getType() == UpdateInformation.getUpdateInformation()) {
+            return "Your information has been updated.";
         }
         else {
             return Agent.getNonAttendedResponse();
