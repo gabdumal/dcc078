@@ -20,7 +20,7 @@ public abstract class Agent {
     }
 
     protected static String getNonAttendedResponse() {
-        return "This request could not be attended!";
+        return "Esta requisição não pode ser atendida!";
     }
 
     protected Agent getSuperiorAgent() {

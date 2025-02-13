@@ -21,10 +21,10 @@ public class Attendant
 
     public String respond(Request request) {
         if (request.getType() == Question.getQuestion()) {
-            return "[Answer to the question].";
+            return "[Responde à questão].";
         }
         else if (request.getType() == UpdateInformation.getUpdateInformation()) {
-            return "Your information has been updated.";
+            return "Seu cadastro foi atualizado.";
         }
         else {
             return Agent.getNonAttendedResponse();

@@ -19,7 +19,7 @@ public class Chatbot
 
     public String respond(Request request) {
         if (request.getType() == Complaint.getComplaint()) {
-            return "Your complaint has been registered.";
+            return "Sua reclamação foi registrada.";
         }
         else {
             return Agent.getNonAttendedResponse();

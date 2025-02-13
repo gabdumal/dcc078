@@ -21,10 +21,10 @@ public class Technician
 
     public String respond(Request request) {
         if (request.getType() == Malfunctioning.getMalfunctioning()) {
-            return "[Answer how to solve the malfunctioning].";
+            return "[Responde a como corrigir o problema de funcionamento].";
         }
         else if (request.getType() == Replacement.getReplacement()) {
-            return "Your replacement has been approved.";
+            return "Sua substituição foi [aprovada/rejeitada].";
         }
         else {
             return Agent.getNonAttendedResponse();
