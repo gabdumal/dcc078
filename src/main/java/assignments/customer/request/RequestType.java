@@ -6,6 +6,6 @@
 
 package assignments.customer.request;
 
-public interface Type {
+public interface RequestType {
 
 }

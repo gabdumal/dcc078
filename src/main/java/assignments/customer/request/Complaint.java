@@ -7,7 +7,7 @@
 package assignments.customer.request;
 
 public class Complaint
-        implements Type {
+        implements RequestType {
 
     private static final Complaint complaint = new Complaint();
 

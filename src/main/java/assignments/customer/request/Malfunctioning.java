@@ -7,7 +7,7 @@
 package assignments.customer.request;
 
 public class Malfunctioning
-        implements Type {
+        implements RequestType {
 
     private static final Malfunctioning malfunctioning = new Malfunctioning();
 

@@ -7,7 +7,7 @@
 package assignments.customer.request;
 
 public class UpdateInformation
-        implements Type {
+        implements RequestType {
 
     private static final UpdateInformation updateInformation = new UpdateInformation();
 

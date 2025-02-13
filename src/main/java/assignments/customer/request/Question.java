@@ -7,7 +7,7 @@
 package assignments.customer.request;
 
 public class Question
-        implements Type {
+        implements RequestType {
 
     private static final Question question = new Question();
 

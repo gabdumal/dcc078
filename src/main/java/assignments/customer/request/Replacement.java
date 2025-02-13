@@ -7,7 +7,7 @@
 package assignments.customer.request;
 
 public class Replacement
-        implements Type {
+        implements RequestType {
 
     private static final Replacement replacement = new Replacement();
 

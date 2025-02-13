@@ -8,18 +8,18 @@ package assignments.customer.request;
 
 public class Request {
 
-    private Type type;
+    private RequestType requestType;
 
-    public Request(Type type) {
-        this.type = type;
+    public Request(RequestType requestType) {
+        this.requestType = requestType;
     }
 
-    public Type getType() {
-        return type;
+    public RequestType getType() {
+        return requestType;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setType(RequestType requestType) {
+        this.requestType = requestType;
     }
 
 }
