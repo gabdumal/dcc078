@@ -7,11 +7,16 @@
 package assignments.exporter.InventoryVisitor;
 
 import assignments.exporter.InventoryItem.Box;
+import assignments.exporter.InventoryItem.InventoryItem;
 import assignments.exporter.InventoryItem.Pallet;
 import assignments.exporter.InventoryItem.Product;
 
 public class CSVExporter
         implements InventoryVisitor {
+
+    public String print(InventoryItem item) {
+        return item.accept(this);
+    }
 
     @Override
     public String printProduct(Product product) {

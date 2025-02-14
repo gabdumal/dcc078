@@ -36,7 +36,7 @@ public class ExporterTest {
     @Test
     public void shouldExportProductAsCSV() {
         var exporter       = new CSVExporter();
-        var exportedString = exporter.printProduct(smartphone);
+        var exportedString = exporter.print(smartphone);
         assertEquals(
                 """
                         Tipo,Nome,Peso,Preço
@@ -48,7 +48,7 @@ public class ExporterTest {
     @Test
     public void shouldExportBoxAsCSV() {
         var exporter       = new CSVExporter();
-        var exportedString = exporter.printBox(smallBox);
+        var exportedString = exporter.print(smallBox);
         assertEquals(
                 """
                         Tipo,Cor,Peso,Preço
@@ -60,7 +60,7 @@ public class ExporterTest {
     @Test
     public void shouldExportPalletAsCSV() {
         var exporter       = new CSVExporter();
-        var exportedString = exporter.printPallet(largePallet);
+        var exportedString = exporter.print(largePallet);
         assertEquals(
                 """
                         Tipo,Peso,Preço
@@ -74,30 +74,28 @@ public class ExporterTest {
     @Test
     public void shouldExportProductAsJSON() {
         var exporter       = new JSONExporter();
-        var exportedString = exporter.printProduct(smartphone);
+        var exportedString = exporter.print(smartphone);
         assertEquals(
                 """
-                        {"type": "Product", "name": "Smartphone", "weight": 0.20, "price": 800.00}
-                        """, exportedString
+                        {"type": "Product", "name": "Smartphone", "weight": 0.20, "price": 800.00}""", exportedString
         );
     }
 
     @Test
     public void shouldExportBoxAsJSON() {
         var exporter       = new JSONExporter();
-        var exportedString = exporter.printBox(smallBox);
+        var exportedString = exporter.print(smallBox);
         assertEquals(
                 """
-                        Tipo,Cor,Peso,Preço
-                        "Caixa","Azul",0.30,1100.00
-                        """, exportedString
+                        {"type": "Box", "color": "Azul", "products": [{"type": "Product", "name": "Smartphone", "weight": 0.20, "price": 800.00}, {"type": "Product", "name": "Câmera", "weight": 0.10, "price": 300.00}]}""",
+                exportedString
         );
     }
 
     @Test
     public void shouldExportPalletAsJSON() {
         var exporter       = new JSONExporter();
-        var exportedString = exporter.printPallet(largePallet);
+        var exportedString = exporter.print(largePallet);
         assertEquals(
                 """
                         Tipo,Peso,Preço

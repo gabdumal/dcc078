@@ -7,16 +7,21 @@
 package assignments.exporter.InventoryVisitor;
 
 import assignments.exporter.InventoryItem.Box;
+import assignments.exporter.InventoryItem.InventoryItem;
 import assignments.exporter.InventoryItem.Pallet;
 import assignments.exporter.InventoryItem.Product;
 
 public class JSONExporter
         implements InventoryVisitor {
 
+    public String print(InventoryItem item) {
+        return item.accept(this);
+    }
+
     @Override
     public String printProduct(Product product) {
         return String.format(
-                "{\"type\": \"Product\", \"name\": \"%s\", \"weight\": %.2f, \"price\": %.2f}%n",
+                "{\"type\": \"Product\", \"name\": \"%s\", \"weight\": %.2f, \"price\": %.2f}",
                 product.getName()
                        .replace("\"", "\\\""),
                 product.getWeight(),
@@ -26,15 +31,26 @@ public class JSONExporter
 
     @Override
     public String printBox(Box box) {
-        var totalWeight = 0d;
-        var totalPrice  = 0d;
+        StringBuilder output = new StringBuilder();
 
-        for (var product : box.getProducts()) {
-            totalWeight += product.getWeight();
-            totalPrice += product.getPrice();
+        output.append(String.format(
+                "{\"type\": \"Box\", \"color\": \"%s\", \"products\": [",
+                box.getColor()
+                   .replace("\"", "\\\"")
+        ));
+
+        for (Product product : box.getProducts()) {
+            output.append(product.accept(this));
+            output.append(", ");
         }
 
-        return String.format("\"Caixa\",\"%s\",%.2f,%.2f%n", box.getColor(), totalWeight, totalPrice);
+        if (!box.getProducts()
+                .isEmpty()) {
+            output.delete(output.length() - 2, output.length()); // Remove trailing comma
+        }
+
+        output.append("]}");
+        return output.toString();
     }
 
     @Override

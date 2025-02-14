@@ -38,8 +38,8 @@ public class Product
     }
 
     @Override
-    public void accept(InventoryVisitor visitor) {
-        visitor.printProduct(this);
+    public String accept(InventoryVisitor visitor) {
+        return visitor.printProduct(this);
     }
 
 }

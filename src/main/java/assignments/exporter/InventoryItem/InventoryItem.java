@@ -10,6 +10,6 @@ import assignments.exporter.InventoryVisitor.InventoryVisitor;
 
 public interface InventoryItem {
 
-    void accept(InventoryVisitor visitor);
+    String accept(InventoryVisitor visitor);
 
 }

@@ -15,6 +15,7 @@ public class Box
 
     private final String             color;
     private final ArrayList<Product> products;
+
     public Box(
             String color,
             ArrayList<Product> products
@@ -32,8 +33,8 @@ public class Box
     }
 
     @Override
-    public void accept(InventoryVisitor visitor) {
-        visitor.printBox(this);
+    public String accept(InventoryVisitor visitor) {
+        return visitor.printBox(this);
     }
 
 }
