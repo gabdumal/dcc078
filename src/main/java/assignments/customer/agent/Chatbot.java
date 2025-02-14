@@ -17,9 +17,21 @@ public class Chatbot
         this.setSuperiorAgent(superiorAgent);
     }
 
+    @Override
+    protected String getRole() {
+        return "Chatbot";
+    }
+
     public String respond(Request request) {
         if (request.getType() == Complaint.getComplaint()) {
-            return "Sua reclamação foi registrada.";
+            var response = "Sua reclamação foi registrada.";
+
+            var organization = request.getOrganization();
+            if (organization != null) {
+                response += "\nA resposta da empresa é:\n" + organization.receiveComplaint(request.getDescription());
+            }
+
+            return response;
         }
         else {
             return Agent.getNonAttendedResponse();

@@ -19,6 +19,11 @@ public class Technician
         this.setSuperiorAgent(superiorAgent);
     }
 
+    @Override
+    protected String getRole() {
+        return "Técnico";
+    }
+
     public String respond(Request request) {
         if (request.getType() == Malfunctioning.getMalfunctioning()) {
             return "[Responde a como corrigir o problema de funcionamento].";

@@ -23,6 +23,8 @@ public abstract class Agent {
         return "Esta requisição não pode ser atendida!";
     }
 
+    protected abstract String getRole();
+
     protected Agent getSuperiorAgent() {
         return superiorAgent;
     }
@@ -33,14 +35,14 @@ public abstract class Agent {
 
     public String handleRequest(Request request) {
         if (this.requestsList.contains(request.getType())) {
-            return this.respond(request);
+            return this.getRole() + ": " + this.respond(request);
         }
         else {
             if (this.superiorAgent != null) {
                 return this.superiorAgent.handleRequest(request);
             }
             else {
-                return Agent.getNonAttendedResponse();
+                return this.getRole() + ": " + Agent.getNonAttendedResponse();
             }
         }
     }

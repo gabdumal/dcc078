@@ -19,6 +19,11 @@ public class Attendant
         this.setSuperiorAgent(superiorAgent);
     }
 
+    @Override
+    protected String getRole() {
+        return "Atendente";
+    }
+
     public String respond(Request request) {
         if (request.getType() == Question.getQuestion()) {
             return "[Responde à questão].";

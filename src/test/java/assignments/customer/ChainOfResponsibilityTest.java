@@ -32,36 +32,42 @@ public class ChainOfResponsibilityTest {
 
     @Test
     public void chatbotShouldAttendComplaint() {
-        var request  = new Request(Complaint.getComplaint(), "Os produtos são menores que aparentam ser no anúncio.");
-        var response = this.chatbot.respond(request);
-        assertEquals("Sua reclamação foi registrada.", response);
+        var request = new Request(
+                Complaint.getComplaint(),
+                                  "Os produtos são menores que aparentam ser no anúncio.",
+                                  null
+        );
+        var response = this.chatbot.handleRequest(request);
+        assertEquals("Chatbot: Sua reclamação foi registrada.", response);
     }
 
     @Test
     public void chatbotShouldNotAttendQuestion() {
-        var request  = new Request(Question.getQuestion(), "Como eu ativo o modo silencioso do micro-ondas?");
-        var response = this.chatbot.respond(request);
-        assertEquals("Esta requisição não pode ser atendida!", response);
+        var request  = new Request(Question.getQuestion(), "Como eu ativo o modo silencioso do micro-ondas?", null);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals("Atendente: [Responde à questão].", response);
     }
 
     @Test
     public void chatbotShouldNotAttendUpdateInformation() {
         var request = new Request(
                 UpdateInformation.getUpdateInformation(),
-                "Gostaria de atualizar meu número de telefone para (12)98765-4321."
+                "Gostaria de atualizar meu número de telefone para (12)98765-4321.",
+                null
         );
-        var response = this.chatbot.respond(request);
-        assertEquals("Esta requisição não pode ser atendida!", response);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals("Atendente: Seu cadastro foi atualizado.", response);
     }
 
     @Test
     public void chatbotShouldNotAttendMalfunctioning() {
         var request = new Request(
                 Malfunctioning.getMalfunctioning(),
-                "A trempe na parte traseira esquerda do meu fogão não está acendendo."
+                "A trempe na parte traseira esquerda do meu fogão não está acendendo.",
+                null
         );
-        var response = this.chatbot.respond(request);
-        assertEquals("Esta requisição não pode ser atendida!", response);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals("Técnico: [Responde a como corrigir o problema de funcionamento].", response);
     }
 
     @Test
@@ -69,46 +75,53 @@ public class ChainOfResponsibilityTest {
         var request = new Request(
                 Refund.getRefund(),
                 "O laptop que foi entregue é de um modelo diferente daquele que eu pedi. Gostaria " +
-                "de solicitar a troca pelo correto."
+                "de solicitar a troca pelo correto.",
+                null
         );
-        var response = this.chatbot.respond(request);
-        assertEquals("Esta requisição não pode ser atendida!", response);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals("Técnico: Seu reembolso foi [aprovado/rejeitado].", response);
     }
 
     /* Attendant */
 
     @Test
     public void attendantShouldNotAttendComplaint() {
-        var request  = new Request(Complaint.getComplaint(), "Os produtos são menores que aparentam ser no anúncio.");
-        var response = this.attendant.respond(request);
-        assertEquals("Esta requisição não pode ser atendida!", response);
+        var request = new Request(
+                Complaint.getComplaint(),
+                                  "Os produtos são menores que aparentam ser no anúncio.",
+                                  null
+        );
+        var response = this.attendant.handleRequest(request);
+        assertEquals("Técnico: Esta requisição não pode ser atendida!", response);
     }
 
     @Test
     public void attendantShouldAttendQuestion() {
-        var request  = new Request(Question.getQuestion(), "Como eu ativo o modo silencioso do micro-ondas?");
-        var response = this.attendant.respond(request);
-        assertEquals("[Responde à questão].", response);
+        var request  = new Request(Question.getQuestion(), "Como eu ativo o modo silencioso do micro-ondas?", null);
+        var response = this.attendant.handleRequest(request);
+        assertEquals("Atendente: [Responde à questão].", response);
     }
 
     @Test
     public void attendantShouldAttendUpdateInformation() {
         var request = new Request(
                 UpdateInformation.getUpdateInformation(),
-                "Gostaria de atualizar meu número de telefone para (12)98765-4321."
+                "Gostaria de atualizar meu número de telefone para (12)98765-4321.",
+                null
         );
-        var response = this.attendant.respond(request);
-        assertEquals("Seu cadastro foi atualizado.", response);
+        var response = this.attendant.handleRequest(request);
+        assertEquals("Atendente: Seu cadastro foi atualizado.", response);
     }
 
     @Test
     public void attendantShouldNotAttendMalfunctioning() {
         var request = new Request(
                 Malfunctioning.getMalfunctioning(),
-                "A trempe na parte traseira esquerda do meu fogão não está acendendo."
+                "A trempe na parte traseira esquerda do meu fogão não está acendendo.",
+                null
         );
-        var response = this.attendant.respond(request);
-        assertEquals("Esta requisição não pode ser atendida!", response);
+        var response = this.attendant.handleRequest(request);
+        assertEquals("Técnico: [Responde a como corrigir o problema de funcionamento].", response);
     }
 
     @Test
@@ -116,46 +129,53 @@ public class ChainOfResponsibilityTest {
         var request = new Request(
                 Refund.getRefund(),
                 "O laptop que foi entregue é de um modelo diferente daquele que eu pedi. Gostaria " +
-                "de solicitar a troca pelo correto."
+                "de solicitar a troca pelo correto.",
+                null
         );
-        var response = this.attendant.respond(request);
-        assertEquals("Esta requisição não pode ser atendida!", response);
+        var response = this.attendant.handleRequest(request);
+        assertEquals("Técnico: Seu reembolso foi [aprovado/rejeitado].", response);
     }
 
     /* Technician */
 
     @Test
     public void technicianShouldNotAttendComplaint() {
-        var request  = new Request(Complaint.getComplaint(), "Os produtos são menores que aparentam ser no anúncio.");
-        var response = this.technician.respond(request);
-        assertEquals("Esta requisição não pode ser atendida!", response);
+        var request = new Request(
+                Complaint.getComplaint(),
+                                  "Os produtos são menores que aparentam ser no anúncio.",
+                                  null
+        );
+        var response = this.technician.handleRequest(request);
+        assertEquals("Técnico: Esta requisição não pode ser atendida!", response);
     }
 
     @Test
     public void technicianShouldNotAttendQuestion() {
-        var request  = new Request(Question.getQuestion(), "Como eu ativo o modo silencioso do micro-ondas?");
-        var response = this.technician.respond(request);
-        assertEquals("Esta requisição não pode ser atendida!", response);
+        var request  = new Request(Question.getQuestion(), "Como eu ativo o modo silencioso do micro-ondas?", null);
+        var response = this.technician.handleRequest(request);
+        assertEquals("Técnico: Esta requisição não pode ser atendida!", response);
     }
 
     @Test
     public void technicianShouldNotAttendUpdateInformation() {
         var request = new Request(
                 UpdateInformation.getUpdateInformation(),
-                "Gostaria de atualizar meu número de telefone para (12)98765-4321."
+                "Gostaria de atualizar meu número de telefone para (12)98765-4321.",
+                null
         );
-        var response = this.technician.respond(request);
-        assertEquals("Esta requisição não pode ser atendida!", response);
+        var response = this.technician.handleRequest(request);
+        assertEquals("Técnico: Esta requisição não pode ser atendida!", response);
     }
 
     @Test
     public void technicianShouldAttendMalfunctioning() {
         var request = new Request(
                 Malfunctioning.getMalfunctioning(),
-                "A trempe na parte traseira esquerda do meu fogão não está acendendo."
+                "A trempe na parte traseira esquerda do meu fogão não está acendendo.",
+                null
         );
-        var response = this.technician.respond(request);
-        assertEquals("[Responde a como corrigir o problema de funcionamento].", response);
+        var response = this.technician.handleRequest(request);
+        assertEquals("Técnico: [Responde a como corrigir o problema de funcionamento].", response);
     }
 
     @Test
@@ -163,10 +183,11 @@ public class ChainOfResponsibilityTest {
         var refund = new Request(
                 Refund.getRefund(),
                 "O laptop que foi entregue não liga, mesmo já tendo feito os testes padrão. Gostaria " +
-                "de solicitar o reembolso."
+                "de solicitar o reembolso.",
+                null
         );
-        var response = this.technician.respond(refund);
-        assertEquals("Seu reembolso foi [aprovado/rejeitado].", response);
+        var response = this.technician.handleRequest(refund);
+        assertEquals("Técnico: Seu reembolso foi [aprovado/rejeitado].", response);
     }
 
 }
