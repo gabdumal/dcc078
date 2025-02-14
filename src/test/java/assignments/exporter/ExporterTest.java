@@ -10,6 +10,7 @@ import assignments.exporter.InventoryItem.Box;
 import assignments.exporter.InventoryItem.Pallet;
 import assignments.exporter.InventoryItem.Product;
 import assignments.exporter.InventoryVisitor.CSVExporter;
+import assignments.exporter.InventoryVisitor.HTMLExporter;
 import assignments.exporter.InventoryVisitor.JSONExporter;
 import org.junit.jupiter.api.Test;
 
@@ -95,6 +96,50 @@ public class ExporterTest {
     @Test
     public void shouldExportPalletAsJSON() {
         var exporter = new JSONExporter();
+        var output   = exporter.print(largePallet);
+        assertEquals(
+                """
+                        {"type": "Box", "boxes": [{"type": "Box", "color": "Azul", "products": [{"type": "Product", "name": "Smartphone", "weight": 0.20, "price": 800.00}, {"type": "Product", "name": "Câmera", "weight": 0.10, "price": 300.00}]}, {"type": "Box", "color": "Branca", "products": [{"type": "Product", "name": "Laptop", "weight": 2.50, "price": 3600.00}, {"type": "Product", "name": "Teclado", "weight": 0.70, "price": 470.00}]}]}""",
+                output
+        );
+    }
+
+    /* HTML */
+
+    @Test
+    public void shouldExportProductAsHTML() {
+        var exporter = new HTMLExporter();
+        var output   = exporter.print(smartphone);
+        assertEquals(
+                """
+                        <ul>
+                        <li>
+                        <p>Product</p>
+                        <ul>
+                        <li>Name: Smartphone</li>
+                        <li>Weight: 0.20 Kg</li>
+                        <li>Price: R$ 800.00</li>
+                        </ul>
+                        </li>
+                        </ul>
+                        """, output
+        );
+    }
+
+    @Test
+    public void shouldExportBoxAsHTML() {
+        var exporter = new HTMLExporter();
+        var output   = exporter.print(smallBox);
+        assertEquals(
+                """
+                        {"type": "Box", "color": "Azul", "products": [{"type": "Product", "name": "Smartphone", "weight": 0.20, "price": 800.00}, {"type": "Product", "name": "Câmera", "weight": 0.10, "price": 300.00}]}""",
+                output
+        );
+    }
+
+    @Test
+    public void shouldExportPalletAsHTML() {
+        var exporter = new HTMLExporter();
         var output   = exporter.print(largePallet);
         assertEquals(
                 """

@@ -11,21 +11,26 @@ import assignments.exporter.InventoryItem.InventoryItem;
 import assignments.exporter.InventoryItem.Pallet;
 import assignments.exporter.InventoryItem.Product;
 
-public class JSONExporter
+public class HTMLExporter
         implements InventoryVisitor {
 
     public String print(InventoryItem item) {
-        return item.accept(this);
+        return "<ul>\n" + item.accept(this) + "</ul>\n";
     }
 
     @Override
     public String printProduct(Product product) {
         return String.format(
-                "{\"type\": \"Product\", \"name\": \"%s\", \"weight\": %.2f, \"price\": %.2f}",
-                product.getName()
-                       .replace("\"", "\\\""),
-                product.getWeight(),
-                product.getPrice()
+                """
+                        <li>
+                        <p>Product</p>
+                        <ul>
+                        <li>Name: %s</li>
+                        <li>Weight: %.2f Kg</li>
+                        <li>Price: R$ %.2f</li>
+                        </ul>
+                        </li>
+                        """, product.getName(), product.getWeight(), product.getPrice()
         );
     }
 
@@ -40,7 +45,7 @@ public class JSONExporter
         ));
 
         for (Product product : box.getProducts()) {
-            output.append(this.printProduct(product));
+            output.append(product.accept(this));
             output.append(", ");
         }
 
@@ -60,7 +65,7 @@ public class JSONExporter
         output.append("{\"type\": \"Box\", \"boxes\": [");
 
         for (Box box : pallet.getBoxes()) {
-            output.append(this.printBox(box));
+            output.append(box.accept(this));
             output.append(", ");
         }
 
