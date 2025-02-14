@@ -30,12 +30,12 @@ public class ServiceProvider
 
     @Override
     public String receiveQuestion(String question) {
-        return "";
+        return "[Responde à questão].";
     }
 
     @Override
     public String receiveRefundRequest(String description) {
-        return "";
+        return "[Aprova/reprova o reembolso].";
     }
 
 }

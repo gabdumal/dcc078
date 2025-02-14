@@ -13,6 +13,7 @@ import assignments.customer.organization.HomeAppliancesManufacturer;
 import assignments.customer.organization.ServiceProvider;
 import assignments.customer.organization.SoftwareVendor;
 import assignments.customer.request.Complaint;
+import assignments.customer.request.Question;
 import assignments.customer.request.Request;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,10 +49,10 @@ public class MediatorTest {
                 Complaint.getComplaint(),
                 "Os prazos de atendimento estão muito demorados.",
                 null);
-        var response = this.chatbot.respond(request);
+        var response = this.chatbot.handleRequest(request);
         assertEquals(
                 """
-                        Sua reclamação foi registrada.""",
+                        Chatbot: Sua reclamação foi registrada.""",
                 response);
     }
 
@@ -61,10 +62,10 @@ public class MediatorTest {
                 Complaint.getComplaint(),
                 "Os produtos são menores que aparentam ser no anúncio.",
                 homeAppliancesManufacturer);
-        var response = this.chatbot.respond(request);
+        var response = this.chatbot.handleRequest(request);
         assertEquals(
                 """
-                        Sua reclamação foi registrada.
+                        Chatbot: Sua reclamação foi registrada.
                         A resposta da empresa é:
                         Nós, da empresa Eletro-casa eletrodomésticos, procuraremos melhorar nossos processos para evitar demais transtornos.""",
                 response);
@@ -76,10 +77,10 @@ public class MediatorTest {
                 Complaint.getComplaint(),
                 "A parte de trás do sofá não foi limpa.",
                 serviceProvider);
-        var response = this.chatbot.respond(request);
+        var response = this.chatbot.handleRequest(request);
         assertEquals(
                 """
-                        Sua reclamação foi registrada.
+                        Chatbot: Sua reclamação foi registrada.
                         A resposta da empresa é:
                         Nós, da empresa Limpa-tudo, procuraremos melhorar nosso serviço, para evitar que a situação se repita.""",
                 response);
@@ -91,12 +92,121 @@ public class MediatorTest {
                 Complaint.getComplaint(),
                 "O sistema de caixa não agrupa produtos iguais no mesmo item.",
                 softwareVendor);
-        var response = this.chatbot.respond(request);
+        var response = this.chatbot.handleRequest(request);
         assertEquals(
                 """
-                        Sua reclamação foi registrada.
+                        Chatbot: Sua reclamação foi registrada.
                         A resposta da empresa é:
                         Nós, da empresa Tecno-lebre software, procuraremos melhorar nossos sistemas, a fim de solucionar seu problema.""",
+                response);
+    }
+
+    /* Question */
+
+    @Test
+    public void centralReceivesSimpleQuestion() {
+        var request = new Request(
+                Question.getQuestion(),
+                "Qual é o horário de atendimento?",
+                null);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Atendente: [Responde à questão].""",
+                response);
+    }
+
+    @Test
+    public void centralReceivesComplexQuestion() {
+        var request = new Request(
+                Question.getQuestion(),
+                "[COMPLEXA]",
+                null);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Atendente: Infelizmente não é possível responder a essa pergunta.""",
+                response);
+    }
+
+    @Test
+    public void homeAppliancesManufacturerReceivesSimpleQuestion() {
+        var request = new Request(
+                Question.getQuestion(),
+                "Qual é o horário de atendimento?",
+                homeAppliancesManufacturer);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Atendente: [Responde à questão].""",
+                response);
+    }
+
+    @Test
+    public void homeAppliancesManufacturerReceivesComplexQuestion() {
+        var request = new Request(
+                Question.getQuestion(),
+                "[COMPLEXA]",
+                homeAppliancesManufacturer);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Atendente: A resposta da empresa Eletro-casa é:
+                        [Responde à questão].""",
+                response);
+    }
+
+    @Test
+    public void serviceProviderReceivesSimpleQuestion() {
+        var request = new Request(
+                Question.getQuestion(),
+                "Qual é o horário de atendimento?",
+                serviceProvider);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Atendente: [Responde à questão].""",
+                response);
+    }
+
+    @Test
+    public void serviceProviderReceivesComplexQuestion() {
+        var request = new Request(
+                Question.getQuestion(),
+                "[COMPLEXA]",
+                serviceProvider);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Atendente: A resposta da empresa Limpa-tudo é:
+                        [Responde à questão].""",
+                response);
+    }
+
+    @Test
+    public void softwareVendorReceivesSimpleQuestion() {
+        var request = new Request(
+                Question.getQuestion(),
+                "Qual é o horário de atendimento?",
+                softwareVendor);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Atendente: [Responde à questão].""",
+                response);
+    }
+
+    @Test
+    public void softwareVendorReceivesComplexQuestion() {
+        var request = new Request(
+                Question.getQuestion(),
+                "[COMPLEXA]",
+                softwareVendor);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Atendente: A resposta da empresa Tecno-lebre é:
+                        [Responde à questão].""",
                 response);
     }
 

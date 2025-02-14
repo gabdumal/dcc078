@@ -26,11 +26,22 @@ public class Attendant
 
     public String respond(Request request) {
         if (request.getType() == Question.getQuestion()) {
+            if (request.getDescription().startsWith("[COMPLEXA]")) {
+                if (request.getOrganization() != null) {
+                    return "A resposta da empresa "
+                            + request.getOrganization().getName() + " é:\n"
+                            + request.getOrganization().receiveQuestion(request.getDescription());
+                } else {
+                    return "Infelizmente não é possível responder a essa pergunta.";
+                }
+            }
             return "[Responde à questão].";
         }
+
         else if (request.getType() == UpdateInformation.getUpdateInformation()) {
             return "Seu cadastro foi atualizado.";
         }
+
         else {
             return Agent.getNonAttendedResponse();
         }
