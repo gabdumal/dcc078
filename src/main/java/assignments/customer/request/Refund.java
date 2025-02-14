@@ -6,16 +6,16 @@
 
 package assignments.customer.request;
 
-public class Replacement
+public class Refund
         implements RequestType {
 
-    private static final Replacement replacement = new Replacement();
+    private static final Refund refund = new Refund();
 
-    private Replacement() {
+    private Refund() {
     }
 
-    public static Replacement getReplacement() {
-        return replacement;
+    public static Refund getRefund() {
+        return refund;
     }
 
 }

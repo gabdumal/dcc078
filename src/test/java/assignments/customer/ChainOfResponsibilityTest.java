@@ -67,7 +67,7 @@ public class ChainOfResponsibilityTest {
     @Test
     public void chatbotShouldNotAttendReplacement() {
         var request = new Request(
-                Replacement.getReplacement(),
+                Refund.getRefund(),
                 "O laptop que foi entregue é de um modelo diferente daquele que eu pedi. Gostaria " +
                 "de solicitar a troca pelo correto."
         );
@@ -114,7 +114,7 @@ public class ChainOfResponsibilityTest {
     @Test
     public void attendantShouldNotAttendReplacement() {
         var request = new Request(
-                Replacement.getReplacement(),
+                Refund.getRefund(),
                 "O laptop que foi entregue é de um modelo diferente daquele que eu pedi. Gostaria " +
                 "de solicitar a troca pelo correto."
         );
@@ -160,13 +160,13 @@ public class ChainOfResponsibilityTest {
 
     @Test
     public void technicianShouldAttendReplacement() {
-        var request = new Request(
-                Replacement.getReplacement(),
-                "O laptop que foi entregue é de um modelo diferente daquele que eu pedi. Gostaria " +
-                "de solicitar a troca pelo correto."
+        var refund = new Request(
+                Refund.getRefund(),
+                "O laptop que foi entregue não liga, mesmo já tendo feito os testes padrão. Gostaria " +
+                "de solicitar o reembolso."
         );
-        var response = this.technician.respond(request);
-        assertEquals("Sua substituição foi [aprovada/rejeitada].", response);
+        var response = this.technician.respond(refund);
+        assertEquals("Seu reembolso foi [aprovado/rejeitado].", response);
     }
 
 }

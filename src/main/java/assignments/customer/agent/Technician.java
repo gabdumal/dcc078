@@ -7,7 +7,7 @@
 package assignments.customer.agent;
 
 import assignments.customer.request.Malfunctioning;
-import assignments.customer.request.Replacement;
+import assignments.customer.request.Refund;
 import assignments.customer.request.Request;
 
 public class Technician
@@ -15,7 +15,7 @@ public class Technician
 
     public Technician(Agent superiorAgent) {
         this.requestsList.add(Malfunctioning.getMalfunctioning());
-        this.requestsList.add(Replacement.getReplacement());
+        this.requestsList.add(Refund.getRefund());
         this.setSuperiorAgent(superiorAgent);
     }
 
@@ -23,8 +23,8 @@ public class Technician
         if (request.getType() == Malfunctioning.getMalfunctioning()) {
             return "[Responde a como corrigir o problema de funcionamento].";
         }
-        else if (request.getType() == Replacement.getReplacement()) {
-            return "Sua substituição foi [aprovada/rejeitada].";
+        else if (request.getType() == Refund.getRefund()) {
+            return "Seu reembolso foi [aprovado/rejeitado].";
         }
         else {
             return Agent.getNonAttendedResponse();
