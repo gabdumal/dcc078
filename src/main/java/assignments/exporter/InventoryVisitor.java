@@ -10,4 +10,6 @@ public interface InventoryVisitor {
 
     void visitProduct(Product product);
 
+    void visitBox(Box box);
+
 }
