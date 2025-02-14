@@ -38,7 +38,13 @@ public class Technician
             }
             return "[Responde a como corrigir o problema de funcionamento].";
         } else if (request.getType() == Refund.getRefund()) {
-            return "Seu reembolso foi [aprovado/rejeitado].";
+            if (request.getOrganization() != null) {
+                return "O setor de reembolsos da empresa "
+                        + request.getOrganization().getName() + " responde o seguinte:\n"
+                        + request.getOrganization().receiveRefundRequest(request.getDescription());
+            } else {
+                return "Não foi possível identificar a empresa responsável pelo reembolso.";
+            }
         } else {
             return Agent.getNonAttendedResponse();
         }

@@ -15,6 +15,7 @@ import assignments.customer.organization.SoftwareVendor;
 import assignments.customer.request.Complaint;
 import assignments.customer.request.Malfunctioning;
 import assignments.customer.request.Question;
+import assignments.customer.request.Refund;
 import assignments.customer.request.Request;
 import assignments.customer.request.UpdateInformation;
 
@@ -375,6 +376,63 @@ public class MediatorTest {
                 """
                         Técnico: O suporte técnico da empresa Tecno-lebre responde o seguinte:
                         [Responde à questão].""",
+                response);
+    }
+
+    /* Refund */
+
+    @Test
+    public void centralReceivesUpdateRefundRequest() {
+        var request = new Request(
+                Refund.getRefund(),
+                "Gostaria de solicitar o reembolso do valor da compra [DETALHES].",
+                null);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Técnico: Não foi possível identificar a empresa responsável pelo reembolso.""",
+                response);
+    }
+
+    @Test
+    public void homeAppliancesManufacturerReceivesUpdateRefundRequest() {
+        var request = new Request(
+                Refund.getRefund(),
+                "Gostaria de solicitar o reembolso do valor da compra [DETALHES].",
+                homeAppliancesManufacturer);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Técnico: O setor de reembolsos da empresa Eletro-casa responde o seguinte:
+                        [Aprova/reprova o reembolso].""",
+                response);
+    }
+
+    @Test
+    public void serviceProviderReceivesUpdateRefundRequest() {
+        var request = new Request(
+                Refund.getRefund(),
+                "Gostaria de solicitar o reembolso do valor do serviço [DETALHES].",
+                serviceProvider);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Técnico: O setor de reembolsos da empresa Limpa-tudo responde o seguinte:
+                        [Aprova/reprova o reembolso].""",
+                response);
+    }
+
+    @Test
+    public void softwareVendorReceivesUpdateRefundRequest() {
+        var request = new Request(
+                Refund.getRefund(),
+                "Gostaria de solicitar o reembolso do valor da compra [DETALHES].",
+                softwareVendor);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Técnico: O setor de reembolsos da empresa Tecno-lebre responde o seguinte:
+                        [Aprova/reprova o reembolso].""",
                 response);
     }
 
