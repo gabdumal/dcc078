@@ -12,4 +12,6 @@ public interface InventoryVisitor {
 
     void visitBox(Box box);
 
+    void visitPallet(Pallet pallet);
+
 }
