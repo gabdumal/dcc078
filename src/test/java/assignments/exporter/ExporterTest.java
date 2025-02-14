@@ -10,6 +10,7 @@ import assignments.exporter.InventoryItem.Box;
 import assignments.exporter.InventoryItem.Pallet;
 import assignments.exporter.InventoryItem.Product;
 import assignments.exporter.InventoryVisitor.CSVExporter;
+import assignments.exporter.InventoryVisitor.JSONExporter;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -34,8 +35,8 @@ public class ExporterTest {
 
     @Test
     public void shouldExportProductAsCSV() {
-        CSVExporter csvExporter    = new CSVExporter();
-        var         exportedString = csvExporter.printProduct(smartphone);
+        var exporter       = new CSVExporter();
+        var exportedString = exporter.printProduct(smartphone);
         assertEquals(
                 """
                         Tipo,Nome,Peso,Preço
@@ -46,8 +47,8 @@ public class ExporterTest {
 
     @Test
     public void shouldExportBoxAsCSV() {
-        CSVExporter csvExporter    = new CSVExporter();
-        var         exportedString = csvExporter.printBox(smallBox);
+        var exporter       = new CSVExporter();
+        var exportedString = exporter.printBox(smallBox);
         assertEquals(
                 """
                         Tipo,Cor,Peso,Preço
@@ -58,8 +59,45 @@ public class ExporterTest {
 
     @Test
     public void shouldExportPalletAsCSV() {
-        CSVExporter csvExporter    = new CSVExporter();
-        var         exportedString = csvExporter.printPallet(largePallet);
+        var exporter       = new CSVExporter();
+        var exportedString = exporter.printPallet(largePallet);
+        assertEquals(
+                """
+                        Tipo,Peso,Preço
+                        "Pallet",3.50,5170.00
+                        """, exportedString
+        );
+    }
+
+    /* JSON */
+
+    @Test
+    public void shouldExportProductAsJSON() {
+        var exporter       = new JSONExporter();
+        var exportedString = exporter.printProduct(smartphone);
+        assertEquals(
+                """
+                        {"type": "Product", "name": "Smartphone", "weight": 0.20, "price": 800.00}
+                        """, exportedString
+        );
+    }
+
+    @Test
+    public void shouldExportBoxAsJSON() {
+        var exporter       = new JSONExporter();
+        var exportedString = exporter.printBox(smallBox);
+        assertEquals(
+                """
+                        Tipo,Cor,Peso,Preço
+                        "Caixa","Azul",0.30,1100.00
+                        """, exportedString
+        );
+    }
+
+    @Test
+    public void shouldExportPalletAsJSON() {
+        var exporter       = new JSONExporter();
+        var exportedString = exporter.printPallet(largePallet);
         assertEquals(
                 """
                         Tipo,Peso,Preço
