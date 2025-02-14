@@ -13,6 +13,7 @@ import assignments.customer.organization.HomeAppliancesManufacturer;
 import assignments.customer.organization.ServiceProvider;
 import assignments.customer.organization.SoftwareVendor;
 import assignments.customer.request.Complaint;
+import assignments.customer.request.Malfunctioning;
 import assignments.customer.request.Question;
 import assignments.customer.request.Request;
 import assignments.customer.request.UpdateInformation;
@@ -127,7 +128,8 @@ public class MediatorTest {
         var response = this.chatbot.handleRequest(request);
         assertEquals(
                 """
-                        Atendente: Infelizmente não é possível responder a essa pergunta.""",
+                        Atendente: A resposta da gerência da central de atendimento é a seguinte:
+                        [Responde à questão].""",
                 response);
     }
 
@@ -263,6 +265,116 @@ public class MediatorTest {
         assertEquals(
                 """
                         Atendente: Seu cadastro foi atualizado.""",
+                response);
+    }
+
+    /* Malfunctioning */
+
+    @Test
+    public void centralReceivesSimpleMalfunctioningComplaint() {
+        var request = new Request(
+                Malfunctioning.getMalfunctioning(),
+                "A URA não reconhece minha voz.",
+                null);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Técnico: [Responde a como corrigir o problema de funcionamento].""",
+                response);
+    }
+
+    @Test
+    public void centralReceivesComplexMalfunctioningComplaint() {
+        var request = new Request(
+                Malfunctioning.getMalfunctioning(),
+                "[COMPLEXO]",
+                null);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Técnico: O suporte técnico da nossa central de atendimento responde o seguinte:
+                        [Responde a como corrigir o problema de funcionamento].""",
+                response);
+    }
+
+    @Test
+    public void homeAppliancesManufacturerReceivesSimpleMalfunctioningComplaint() {
+        var request = new Request(
+                Malfunctioning.getMalfunctioning(),
+                "A trempe traseira na esquerda do fogão não acende.",
+                homeAppliancesManufacturer);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Técnico: [Responde a como corrigir o problema de funcionamento].""",
+                response);
+    }
+
+    @Test
+    public void homeAppliancesManufacturerReceivesComplexMalfunctioningComplaint() {
+        var request = new Request(
+                Malfunctioning.getMalfunctioning(),
+                "[COMPLEXO].",
+                homeAppliancesManufacturer);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Técnico: O suporte técnico da empresa Eletro-casa responde o seguinte:
+                        [Responde à questão].""",
+                response);
+    }
+
+    @Test
+    public void serviceProviderReceivesSimpleMalfunctioningComplaint() {
+        var request = new Request(
+                Malfunctioning.getMalfunctioning(),
+                "A trempe traseira na esquerda do fogão não acende.",
+                serviceProvider);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Técnico: [Responde a como corrigir o problema de funcionamento].""",
+                response);
+    }
+
+    @Test
+    public void serviceProviderReceivesComplexMalfunctioningComplaint() {
+        var request = new Request(
+                Malfunctioning.getMalfunctioning(),
+                "[COMPLEXO].",
+                serviceProvider);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Técnico: O suporte técnico da empresa Limpa-tudo responde o seguinte:
+                        [Responde à questão].""",
+                response);
+    }
+
+    @Test
+    public void softwareVendorReceivesSimpleMalfunctioningComplaint() {
+        var request = new Request(
+                Malfunctioning.getMalfunctioning(),
+                "A trempe traseira na esquerda do fogão não acende.",
+                softwareVendor);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Técnico: [Responde a como corrigir o problema de funcionamento].""",
+                response);
+    }
+
+    @Test
+    public void softwareVendorReceivesComplexMalfunctioningComplaint() {
+        var request = new Request(
+                Malfunctioning.getMalfunctioning(),
+                "[COMPLEXO].",
+                softwareVendor);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Técnico: O suporte técnico da empresa Tecno-lebre responde o seguinte:
+                        [Responde à questão].""",
                 response);
     }
 

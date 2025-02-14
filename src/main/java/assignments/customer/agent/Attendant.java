@@ -32,7 +32,7 @@ public class Attendant
                             + request.getOrganization().getName() + " é:\n"
                             + request.getOrganization().receiveQuestion(request.getDescription());
                 } else {
-                    return "Infelizmente não é possível responder a essa pergunta.";
+                    return "A resposta da gerência da central de atendimento é a seguinte:\n[Responde à questão].";
                 }
             }
             return "[Responde à questão].";

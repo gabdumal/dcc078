@@ -25,7 +25,17 @@ public class Technician
     }
 
     public String respond(Request request) {
+
         if (request.getType() == Malfunctioning.getMalfunctioning()) {
+            if (request.getDescription().startsWith("[COMPLEXO]")) {
+                if (request.getOrganization() != null) {
+                    return "O suporte técnico da empresa "
+                            + request.getOrganization().getName() + " responde o seguinte:\n"
+                            + request.getOrganization().receiveQuestion(request.getDescription());
+                } else {
+                    return "O suporte técnico da nossa central de atendimento responde o seguinte:\n[Responde a como corrigir o problema de funcionamento].";
+                }
+            }
             return "[Responde a como corrigir o problema de funcionamento].";
         } else if (request.getType() == Refund.getRefund()) {
             return "Seu reembolso foi [aprovado/rejeitado].";
