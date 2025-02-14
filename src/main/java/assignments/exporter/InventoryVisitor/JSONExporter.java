@@ -55,17 +55,22 @@ public class JSONExporter
 
     @Override
     public String printPallet(Pallet pallet) {
-        var totalWeight = 0d;
-        var totalPrice  = 0d;
+        StringBuilder output = new StringBuilder();
 
-        for (var box : pallet.getBoxes()) {
-            for (var product : box.getProducts()) {
-                totalWeight += product.getWeight();
-                totalPrice += product.getPrice();
-            }
+        output.append("{\"type\": \"Box\", \"boxes\": [");
+
+        for (Box box : pallet.getBoxes()) {
+            output.append(box.accept(this));
+            output.append(", ");
         }
 
-        return String.format("\"Pallet\",%.2f,%.2f%n", totalWeight, totalPrice);
+        if (!pallet.getBoxes()
+                   .isEmpty()) {
+            output.delete(output.length() - 2, output.length()); // Remove trailing comma
+        }
+
+        output.append("]}");
+        return output.toString();
     }
 
 }

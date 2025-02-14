@@ -35,37 +35,37 @@ public class ExporterTest {
 
     @Test
     public void shouldExportProductAsCSV() {
-        var exporter       = new CSVExporter();
-        var exportedString = exporter.print(smartphone);
+        var exporter = new CSVExporter();
+        var output   = exporter.print(smartphone);
         assertEquals(
                 """
                         Tipo,Nome,Peso,Preço
                         "Produto","Smartphone",0.20,800.00
-                        """, exportedString
+                        """, output
         );
     }
 
     @Test
     public void shouldExportBoxAsCSV() {
-        var exporter       = new CSVExporter();
-        var exportedString = exporter.print(smallBox);
+        var exporter = new CSVExporter();
+        var output   = exporter.print(smallBox);
         assertEquals(
                 """
                         Tipo,Cor,Peso,Preço
                         "Caixa","Azul",0.30,1100.00
-                        """, exportedString
+                        """, output
         );
     }
 
     @Test
     public void shouldExportPalletAsCSV() {
-        var exporter       = new CSVExporter();
-        var exportedString = exporter.print(largePallet);
+        var exporter = new CSVExporter();
+        var output   = exporter.print(largePallet);
         assertEquals(
                 """
                         Tipo,Peso,Preço
                         "Pallet",3.50,5170.00
-                        """, exportedString
+                        """, output
         );
     }
 
@@ -73,34 +73,33 @@ public class ExporterTest {
 
     @Test
     public void shouldExportProductAsJSON() {
-        var exporter       = new JSONExporter();
-        var exportedString = exporter.print(smartphone);
+        var exporter = new JSONExporter();
+        var output   = exporter.print(smartphone);
         assertEquals(
                 """
-                        {"type": "Product", "name": "Smartphone", "weight": 0.20, "price": 800.00}""", exportedString
+                        {"type": "Product", "name": "Smartphone", "weight": 0.20, "price": 800.00}""", output
         );
     }
 
     @Test
     public void shouldExportBoxAsJSON() {
-        var exporter       = new JSONExporter();
-        var exportedString = exporter.print(smallBox);
+        var exporter = new JSONExporter();
+        var output   = exporter.print(smallBox);
         assertEquals(
                 """
                         {"type": "Box", "color": "Azul", "products": [{"type": "Product", "name": "Smartphone", "weight": 0.20, "price": 800.00}, {"type": "Product", "name": "Câmera", "weight": 0.10, "price": 300.00}]}""",
-                exportedString
+                output
         );
     }
 
     @Test
     public void shouldExportPalletAsJSON() {
-        var exporter       = new JSONExporter();
-        var exportedString = exporter.print(largePallet);
+        var exporter = new JSONExporter();
+        var output   = exporter.print(largePallet);
         assertEquals(
                 """
-                        Tipo,Peso,Preço
-                        "Pallet",3.50,5170.00
-                        """, exportedString
+                        {"type": "Box", "boxes": [{"type": "Box", "color": "Azul", "products": [{"type": "Product", "name": "Smartphone", "weight": 0.20, "price": 800.00}, {"type": "Product", "name": "Câmera", "weight": 0.10, "price": 300.00}]}, {"type": "Box", "color": "Branca", "products": [{"type": "Product", "name": "Laptop", "weight": 2.50, "price": 3600.00}, {"type": "Product", "name": "Teclado", "weight": 0.70, "price": 470.00}]}]}""",
+                output
         );
     }
 
