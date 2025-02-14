@@ -22,7 +22,7 @@ public class Chatbot
         return "Chatbot";
     }
 
-    public String respond(Request request) {
+    protected String respond(Request request) {
         if (request.getType() == Complaint.getComplaint()) {
             var response = "Sua reclamação foi registrada.";
 

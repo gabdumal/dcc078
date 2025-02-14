@@ -24,7 +24,7 @@ public class Technician
         return "Técnico";
     }
 
-    public String respond(Request request) {
+    protected String respond(Request request) {
 
         if (request.getType() == Malfunctioning.getMalfunctioning()) {
             if (request.getDescription().startsWith("[COMPLEXO]")) {

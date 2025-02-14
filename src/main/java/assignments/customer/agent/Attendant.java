@@ -24,7 +24,7 @@ public class Attendant
         return "Atendente";
     }
 
-    public String respond(Request request) {
+    protected String respond(Request request) {
         if (request.getType() == Question.getQuestion()) {
             if (request.getDescription().startsWith("[COMPLEXA]")) {
                 if (request.getOrganization() != null) {
