@@ -21,42 +21,83 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MediatorTest {
 
-    private Chatbot    chatbot;
-    private Attendant  attendant;
+    private Chatbot chatbot;
+    private Attendant attendant;
     private Technician technician;
 
     private HomeAppliancesManufacturer homeAppliancesManufacturer;
-    private ServiceProvider            serviceProvider;
-    private SoftwareVendor             softwareVendor;
+    private ServiceProvider serviceProvider;
+    private SoftwareVendor softwareVendor;
 
     @BeforeEach
     public void setUp() {
         this.technician = new Technician(null);
-        this.attendant  = new Attendant(this.technician);
-        this.chatbot    = new Chatbot(this.attendant);
+        this.attendant = new Attendant(this.technician);
+        this.chatbot = new Chatbot(this.attendant);
 
         this.homeAppliancesManufacturer = new HomeAppliancesManufacturer("Eletro-casa");
-        this.serviceProvider            = new ServiceProvider("Limpa-tudo");
-        this.softwareVendor             = new SoftwareVendor("Tecno-lebre");
+        this.serviceProvider = new ServiceProvider("Limpa-tudo");
+        this.softwareVendor = new SoftwareVendor("Tecno-lebre");
     }
 
-    /* HomeAppliancesManufacturer */
+    /* Complaint */
+
+    @Test
+    public void centralReceivesComplaint() {
+        var request = new Request(
+                Complaint.getComplaint(),
+                "Os prazos de atendimento estão muito demorados.",
+                null);
+        var response = this.chatbot.respond(request);
+        assertEquals(
+                """
+                        Sua reclamação foi registrada.""",
+                response);
+    }
 
     @Test
     public void homeAppliancesManufacturerReceivesComplaint() {
         var request = new Request(
                 Complaint.getComplaint(),
                 "Os produtos são menores que aparentam ser no anúncio.",
-                homeAppliancesManufacturer
-        );
+                homeAppliancesManufacturer);
         var response = this.chatbot.respond(request);
         assertEquals(
                 """
                         Sua reclamação foi registrada.
                         A resposta da empresa é:
                         Nós, da empresa Eletro-casa eletrodomésticos, procuraremos melhorar nossos processos para evitar demais transtornos.""",
-                response
-        );
+                response);
+    }
+
+    @Test
+    public void serviceProviderReceivesComplaint() {
+        var request = new Request(
+                Complaint.getComplaint(),
+                "A parte de trás do sofá não foi limpa.",
+                serviceProvider);
+        var response = this.chatbot.respond(request);
+        assertEquals(
+                """
+                        Sua reclamação foi registrada.
+                        A resposta da empresa é:
+                        Nós, da empresa Limpa-tudo, procuraremos melhorar nosso serviço, para evitar que a situação se repita.""",
+                response);
+    }
+
+    @Test
+    public void softwareVendorReceivesComplaint() {
+        var request = new Request(
+                Complaint.getComplaint(),
+                "O sistema de caixa não agrupa produtos iguais no mesmo item.",
+                softwareVendor);
+        var response = this.chatbot.respond(request);
+        assertEquals(
+                """
+                        Sua reclamação foi registrada.
+                        A resposta da empresa é:
+                        Nós, da empresa Tecno-lebre software, procuraremos melhorar nossos sistemas, a fim de solucionar seu problema.""",
+                response);
     }
 
 }

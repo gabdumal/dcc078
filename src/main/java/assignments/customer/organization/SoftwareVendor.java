@@ -23,7 +23,7 @@ public class SoftwareVendor
     @Override
     public String receiveComplaint(String complaint) {
         return "Nós, da empresa " + this.getName() +
-               " software, procuraremos melhorar nossos sistemas, a fim de solucionar " + "seu problema.";
+                " software, procuraremos melhorar nossos sistemas, a fim de solucionar seu problema.";
     }
 
     @Override

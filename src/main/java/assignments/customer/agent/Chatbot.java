@@ -32,8 +32,7 @@ public class Chatbot
             }
 
             return response;
-        }
-        else {
+        } else {
             return Agent.getNonAttendedResponse();
         }
     }

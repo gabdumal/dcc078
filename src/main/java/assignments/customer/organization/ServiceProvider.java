@@ -22,8 +22,10 @@ public class ServiceProvider
 
     @Override
     public String receiveComplaint(String complaint) {
-        return "Nós, da empresa " + this.getName() + ", procuraremos melhorar nosso serviço, para evitar que a " +
-               "situação se " + "repita.";
+        return "Nós, da empresa "
+                + this.getName() +
+                ", procuraremos melhorar nosso serviço, para evitar que a " +
+                "situação se " + "repita.";
     }
 
     @Override

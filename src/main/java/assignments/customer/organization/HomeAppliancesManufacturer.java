@@ -23,7 +23,7 @@ public class HomeAppliancesManufacturer
     @Override
     public String receiveComplaint(String complaint) {
         return "Nós, da empresa " + this.getName() +
-               " eletrodomésticos, procuraremos melhorar nossos processos para evitar " + "demais transtornos.";
+                " eletrodomésticos, procuraremos melhorar nossos processos para evitar " + "demais transtornos.";
     }
 
     @Override

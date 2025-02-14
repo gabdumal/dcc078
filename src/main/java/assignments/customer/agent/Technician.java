@@ -27,11 +27,9 @@ public class Technician
     public String respond(Request request) {
         if (request.getType() == Malfunctioning.getMalfunctioning()) {
             return "[Responde a como corrigir o problema de funcionamento].";
-        }
-        else if (request.getType() == Refund.getRefund()) {
+        } else if (request.getType() == Refund.getRefund()) {
             return "Seu reembolso foi [aprovado/rejeitado].";
-        }
-        else {
+        } else {
             return Agent.getNonAttendedResponse();
         }
     }

@@ -10,16 +10,16 @@ import assignments.customer.organization.Organization;
 
 public class Request {
 
-    private final String       description;
-    private final RequestType  requestType;
+    private final String description;
+    private final RequestType requestType;
     private final Organization organization;
+
     public Request(
             RequestType requestType,
             String description,
-            Organization organization
-    ) {
-        this.requestType  = requestType;
-        this.description  = description;
+            Organization organization) {
+        this.requestType = requestType;
+        this.description = description;
         this.organization = organization;
     }
 

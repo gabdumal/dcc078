@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public abstract class Agent {
 
     protected ArrayList<RequestType> requestsList = new ArrayList<RequestType>();
-    private   Agent                  superiorAgent;
+    private Agent superiorAgent;
 
     protected Agent() {
     }
@@ -36,12 +36,10 @@ public abstract class Agent {
     public String handleRequest(Request request) {
         if (this.requestsList.contains(request.getType())) {
             return this.getRole() + ": " + this.respond(request);
-        }
-        else {
+        } else {
             if (this.superiorAgent != null) {
                 return this.superiorAgent.handleRequest(request);
-            }
-            else {
+            } else {
                 return this.getRole() + ": " + Agent.getNonAttendedResponse();
             }
         }

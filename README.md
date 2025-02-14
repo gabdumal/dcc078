@@ -4,10 +4,6 @@ Atividade realizada para a disciplina **DCC078** Aspectos Avançados em Engenhar
 
 Este repositório utiliza os padrões Chain of Responsibility e Mediator.
 
-## Diagrama de estado
-
-![Diagrama de estado](./src/main/java/assignments/customer/StateDiagram.png)
-
 ## Diagrama de classe
 
 ![Diagrama de classe](./src/main/java/assignments/customer/ClassDiagram.png)
