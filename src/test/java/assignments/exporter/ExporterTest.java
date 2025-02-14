@@ -114,11 +114,11 @@ public class ExporterTest {
                 """
                         <ul>
                         <li>
-                        <p>Product</p>
+                        <p>Produto</p>
                         <ul>
-                        <li>Name: Smartphone</li>
-                        <li>Weight: 0.20 Kg</li>
-                        <li>Price: R$ 800.00</li>
+                        <li>Nome: Smartphone</li>
+                        <li>Peso: 0.20 Kg</li>
+                        <li>Preço: R$ 800.00</li>
                         </ul>
                         </li>
                         </ul>
@@ -171,8 +171,73 @@ public class ExporterTest {
         var output   = exporter.print(largePallet);
         assertEquals(
                 """
-                        {"type": "Box", "boxes": [{"type": "Box", "color": "Azul", "products": [{"type": "Product", "name": "Smartphone", "weight": 0.20, "price": 800.00}, {"type": "Product", "name": "Câmera", "weight": 0.10, "price": 300.00}]}, {"type": "Box", "color": "Branca", "products": [{"type": "Product", "name": "Laptop", "weight": 2.50, "price": 3600.00}, {"type": "Product", "name": "Teclado", "weight": 0.70, "price": 470.00}]}]}""",
-                output
+                        <ul>
+                        <li>
+                        <p>Pallet</p>
+                        <ul>
+                        <li>Caixas:<ul>
+                        <li>
+                        <p>Caixa</p>
+                        <ul>
+                        <li>Cor: Azul</li>
+                        <li>Produtos:<ul>
+                        <li>
+                        <p>Produto</p>
+                        <ul>
+                        <li>Nome: Smartphone</li>
+                        <li>Peso: 0.20 Kg</li>
+                        <li>Preço: R$ 800.00</li>
+                        </ul>
+                        </li>
+                        </ul>
+                        <ul>
+                        <li>
+                        <p>Produto</p>
+                        <ul>
+                        <li>Nome: Câmera</li>
+                        <li>Peso: 0.10 Kg</li>
+                        <li>Preço: R$ 300.00</li>
+                        </ul>
+                        </li>
+                        </ul>
+                        </li>
+                        </ul>
+                        </li>
+                        </ul>
+                        <ul>
+                        <li>
+                        <p>Caixa</p>
+                        <ul>
+                        <li>Cor: Branca</li>
+                        <li>Produtos:<ul>
+                        <li>
+                        <p>Produto</p>
+                        <ul>
+                        <li>Nome: Laptop</li>
+                        <li>Peso: 2.50 Kg</li>
+                        <li>Preço: R$ 3600.00</li>
+                        </ul>
+                        </li>
+                        </ul>
+                        <ul>
+                        <li>
+                        <p>Produto</p>
+                        <ul>
+                        <li>Nome: Teclado</li>
+                        <li>Peso: 0.70 Kg</li>
+                        <li>Preço: R$ 470.00</li>
+                        </ul>
+                        </li>
+                        </ul>
+                        </li>
+                        </ul>
+                        </li>
+                        </ul>
+                        </li>
+                        </ul>
+                        </li>
+                        </ul>
+                        """, output
         );
     }
 

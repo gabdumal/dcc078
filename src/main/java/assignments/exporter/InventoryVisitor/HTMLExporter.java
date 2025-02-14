@@ -21,11 +21,11 @@ public class HTMLExporter
         return String.format(
                 """
                         <li>
-                        <p>Product</p>
+                        <p>Produto</p>
                         <ul>
-                        <li>Name: %s</li>
-                        <li>Weight: %.2f Kg</li>
-                        <li>Price: R$ %.2f</li>
+                        <li>Nome: %s</li>
+                        <li>Peso: %.2f Kg</li>
+                        <li>Preço: R$ %.2f</li>
                         </ul>
                         </li>
                         """, product.getName(), product.getWeight(), product.getPrice()
@@ -34,14 +34,13 @@ public class HTMLExporter
 
     @Override
     public String printBox(Box box) {
-
-        String output = String.format(
+        return String.format(
                 """
                         <li>
-                        <p>Box</p>
+                        <p>Caixa</p>
                         <ul>
-                        <li>Color: %s</li>
-                        <li>Products:%s</li>
+                        <li>Cor: %s</li>
+                        <li>Produtos:%s</li>
                         </ul>
                         </li>
                         """,
@@ -51,8 +50,6 @@ public class HTMLExporter
                    .map(this::print)
                    .collect(Collectors.joining())
         );
-
-        return output;
     }
 
     public String print(InventoryItem item) {
@@ -61,22 +58,20 @@ public class HTMLExporter
 
     @Override
     public String printPallet(Pallet pallet) {
-        StringBuilder output = new StringBuilder();
-
-        output.append("{\"type\": \"Box\", \"boxes\": [");
-
-        for (Box box : pallet.getBoxes()) {
-            output.append(box.accept(this));
-            output.append(", ");
-        }
-
-        if (!pallet.getBoxes()
-                   .isEmpty()) {
-            output.delete(output.length() - 2, output.length()); // Remove trailing comma
-        }
-
-        output.append("]}");
-        return output.toString();
+        return String.format(
+                """
+                        <li>
+                        <p>Pallet</p>
+                        <ul>
+                        <li>Caixas:%s</li>
+                        </ul>
+                        </li>
+                        """,
+                pallet.getBoxes()
+                      .stream()
+                      .map(this::print)
+                      .collect(Collectors.joining())
+        );
     }
 
 }
