@@ -6,25 +6,33 @@
 
 package assignments.customer.request;
 
+import assignments.customer.organization.Organization;
+
 public class Request {
 
-    private final String      description;
-    private       RequestType requestType;
-
+    private final String       description;
+    private final RequestType  requestType;
+    private final Organization organization;
     public Request(
             RequestType requestType,
-            String description
+            String description,
+            Organization organization
     ) {
-        this.requestType = requestType;
-        this.description = description;
+        this.requestType  = requestType;
+        this.description  = description;
+        this.organization = organization;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Organization getOrganization() {
+        return organization;
     }
 
     public RequestType getType() {
         return requestType;
-    }
-
-    public void setType(RequestType requestType) {
-        this.requestType = requestType;
     }
 
 }
