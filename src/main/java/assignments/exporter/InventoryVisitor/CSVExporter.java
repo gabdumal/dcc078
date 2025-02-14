@@ -42,6 +42,28 @@ public class CSVExporter
         return this.printBoxHeader() + "\n" + this.printBoxRow(box);
     }
 
+    private String printBoxHeader() {
+        return "Tipo,Cor,Peso,Preço";
+    }
+
+    private String printBoxRow(Box box) {
+        var totalWeight = 0d;
+        var totalPrice  = 0d;
+
+        for (var product : box.getProducts()) {
+            totalWeight += product.getWeight();
+            totalPrice += product.getPrice();
+        }
+
+        return String.format(
+                "\"Caixa\",\"%s\",%.2f,%.2f%n",
+                box.getColor()
+                   .replace("\"", "\\\""),
+                totalWeight,
+                totalPrice
+        );
+    }
+
     @Override
     public String printPallet(Pallet pallet) {
         return this.printPalletHeader() + "\n" + this.printPalletRow(pallet);
@@ -63,28 +85,6 @@ public class CSVExporter
         }
 
         return String.format("\"Pallet\",%.2f,%.2f%n", totalWeight, totalPrice);
-    }
-
-    private String printBoxHeader() {
-        return "Tipo,Cor,Peso,Preço";
-    }
-
-    private String printBoxRow(Box box) {
-        var totalWeight = 0d;
-        var totalPrice  = 0d;
-
-        for (var product : box.getProducts()) {
-            totalWeight += product.getWeight();
-            totalPrice += product.getPrice();
-        }
-
-        return String.format(
-                "\"Caixa\",\"%s\",%.2f,%.2f%n",
-                box.getColor()
-                   .replace("\"", "\\\""),
-                totalWeight,
-                totalPrice
-        );
     }
 
 }

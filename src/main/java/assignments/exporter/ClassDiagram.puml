@@ -3,7 +3,72 @@
 
 'left to right direction
 
-package sensors_package as "Sensors" {
+package inventory_item_package as "InventoryItem" {
+
+    interface InventoryItem {
+        + String accept(InventoryVisitor visitor)
+    }
+
+    class Product implements InventoryItem {
+        - {final} String name
+        - {final} double weight
+        - {final} double price
+        + double getWeight()
+        + double getPrice()
+        + String getName()
+        + String accept(InventoryVisitor visitor)
+    }
+
+    class Box implements InventoryItem {
+        - {final} String color
+        + String getColor()
+        + ArrayList<Product> getProducts()
+        + String accept(InventoryVisitor visitor)
+    }
+    Box "1" -> "*" Product
+
+    class Pallet implements InventoryItem {
+        + ArrayList<Product> getProducts()
+        + String accept(InventoryVisitor visitor)
+    }
+    Pallet "1" -> "*" Box
+
+}
+
+package inventory_visitor_package as "InventoryVisitor" {
+
+    interface InventoryVisitor {
+        + String printProduct(Product product)
+        + String printBox(Box box)
+        + String printPallet(Pallet pallet)
+    }
+
+    class CSVExporter implements InventoryVisitor {
+        + String print(InventoryItem item)
+        + String printProduct(Product product)
+        - String printProductHeader()
+        - String printProductRow(Product product)
+        + String printBox(Box box)
+        - String printBoxHeader()
+        - String printBoxRow(Box box)
+        + String printPallet(Pallet pallet)
+        - String printPalletHeader()
+        - String printPalletRow(Pallet pallet)
+    }
+
+    class JSONExporter implements InventoryVisitor {
+        + String print(InventoryItem item)
+        + String printProduct(Product product)
+        + String printBox(Box box)
+        + String printPallet(Pallet pallet)
+    }
+
+    class HTMLExporter implements InventoryVisitor {
+        + String print(InventoryItem item)
+        + String printProduct(Product product)
+        + String printBox(Box box)
+        + String printPallet(Pallet pallet)
+    }
 
 }
 
