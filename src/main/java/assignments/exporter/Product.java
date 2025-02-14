@@ -6,17 +6,29 @@
 
 package assignments.exporter;
 
-public class Product {
+public class Product
+        implements InventoryItem {
 
-    String name;
-    double price;
+    private String name;
+    private double weight;
+    private double price;
 
     public Product(
             String name,
+            double weight,
             double price
     ) {
-        this.name  = name;
-        this.price = price;
+        this.name   = name;
+        this.weight = weight;
+        this.price  = price;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 
     public double getPrice() {
@@ -33,6 +45,11 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public void accept(InventoryVisitor visitor) {
+        visitor.visitProduct(this);
     }
 
 }

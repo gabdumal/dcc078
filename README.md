@@ -1,8 +1,8 @@
-# DCC078 Aspectos Avançados em Engenharia de Software - Chain of Responsibility e Mediator
+# DCC078 Aspectos Avançados em Engenharia de Software - Visitor
 
 Atividade realizada para a disciplina **DCC078** Aspectos Avançados em Engenharia de Software.
 
-Este repositório utiliza os padrões Chain of Responsibility e Mediator.
+Este repositório utiliza os padrões Visitor.
 
 ## Diagrama de estado
 
