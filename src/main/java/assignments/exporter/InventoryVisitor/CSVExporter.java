@@ -23,17 +23,56 @@ public class CSVExporter
     }
 
     private String printProductLine(Product product) {
-        return String.format("Product,%s,%.2f,%.2f%n", product.getName(), product.getWeight(), product.getPrice());
+        return String.format(
+                "\"Produto\",\"%s\",%.2f,%.2f%n",
+                product.getName(),
+                product.getWeight(),
+                product.getPrice()
+        );
     }
 
     @Override
     public String printBox(Box box) {
-        return "";
+        return this.printBoxHeader() + "\n" + this.printBoxLine(box);
     }
 
     @Override
     public String printPallet(Pallet pallet) {
-        return "";
+        return this.printPalletHeader() + "\n" + this.printPalletLine(pallet);
+    }
+
+    private String printPalletHeader() {
+        return "Tipo,Peso,Preço";
+    }
+
+    private String printPalletLine(Pallet pallet) {
+        var totalWeight = 0d;
+        var totalPrice  = 0d;
+
+        for (var box : pallet.getBoxes()) {
+            for (var product : box.getProducts()) {
+                totalWeight += product.getWeight();
+                totalPrice += product.getPrice();
+            }
+        }
+
+        return String.format("\"Pallet\",%.2f,%.2f%n", totalWeight, totalPrice);
+    }
+
+    private String printBoxHeader() {
+        return "Tipo,Cor,Peso,Preço";
+    }
+
+    private String printBoxLine(Box box) {
+        var totalWeight = 0d;
+        var totalPrice  = 0d;
+
+        for (var product : box.getProducts()) {
+            totalWeight += product.getWeight();
+            totalPrice += product.getPrice();
+        }
+
+        return String.format("\"Caixa\",\"%s\",%.2f,%.2f%n", box.getColor(), totalWeight, totalPrice);
     }
 
 }

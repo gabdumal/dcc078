@@ -24,23 +24,47 @@ public class ExporterTest {
     private final Product printer     = new Product("Impressora", 4.2d, 2100d);
     private final Product keyboard    = new Product("Teclado", 0.7d, 470d);
     private final Product webcam      = new Product("Câmera", 0.1d, 300d);
-    private final Box     smallBox    = new Box(new ArrayList<Product>(List.of(smartphone, webcam)));
-    private final Box     mediumBox   = new Box(new ArrayList<Product>(List.of(laptop, keyboard)));
+    private final Box     smallBox    = new Box("Azul", new ArrayList<Product>(List.of(smartphone, webcam)));
+    private final Box     mediumBox   = new Box("Branca", new ArrayList<Product>(List.of(laptop, keyboard)));
     private final Pallet  largePallet = new Pallet(new ArrayList<Box>(List.of(smallBox, mediumBox)));
-    private final Box     largeBox    = new Box(new ArrayList<Product>(List.of(printer)));
+    private final Box     largeBox    = new Box("Marrom", new ArrayList<Product>(List.of(printer)));
     private final Pallet  smallPallet = new Pallet(new ArrayList<Box>(List.of(largeBox)));
 
     /* CSV */
 
     @Test
     public void shouldExportProductAsCSV() {
-        CSVExporter csvExporter = new CSVExporter();
-        var         exported    = csvExporter.printProduct(smartphone);
+        CSVExporter csvExporter    = new CSVExporter();
+        var         exportedString = csvExporter.printProduct(smartphone);
         assertEquals(
                 """
                         Tipo,Nome,Peso,Preço
-                        Product,Smartphone,0.20,800.00
-                        """, exported
+                        "Produto","Smartphone",0.20,800.00
+                        """, exportedString
+        );
+    }
+
+    @Test
+    public void shouldExportBoxAsCSV() {
+        CSVExporter csvExporter    = new CSVExporter();
+        var         exportedString = csvExporter.printBox(smallBox);
+        assertEquals(
+                """
+                        Tipo,Cor,Peso,Preço
+                        "Caixa","Azul",0.30,1100.00
+                        """, exportedString
+        );
+    }
+
+    @Test
+    public void shouldExportPalletAsCSV() {
+        CSVExporter csvExporter    = new CSVExporter();
+        var         exportedString = csvExporter.printPallet(largePallet);
+        assertEquals(
+                """
+                        Tipo,Peso,Preço
+                        "Pallet",3.50,5170.00
+                        """, exportedString
         );
     }
 

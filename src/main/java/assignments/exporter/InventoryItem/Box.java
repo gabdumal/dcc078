@@ -13,10 +13,18 @@ import java.util.ArrayList;
 public class Box
         implements InventoryItem {
 
+    private final String             color;
     private final ArrayList<Product> products;
-
-    public Box(ArrayList<Product> products) {
+    public Box(
+            String color,
+            ArrayList<Product> products
+    ) {
+        this.color    = color;
         this.products = products;
+    }
+
+    public String getColor() {
+        return color;
     }
 
     public ArrayList<Product> getProducts() {
