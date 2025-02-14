@@ -15,6 +15,8 @@ import assignments.customer.organization.SoftwareVendor;
 import assignments.customer.request.Complaint;
 import assignments.customer.request.Question;
 import assignments.customer.request.Request;
+import assignments.customer.request.UpdateInformation;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -133,7 +135,7 @@ public class MediatorTest {
     public void homeAppliancesManufacturerReceivesSimpleQuestion() {
         var request = new Request(
                 Question.getQuestion(),
-                "Qual é o horário de atendimento?",
+                "Gostaria de receber o manual do Liquidificador modelo XH-89.",
                 homeAppliancesManufacturer);
         var response = this.chatbot.handleRequest(request);
         assertEquals(
@@ -160,7 +162,7 @@ public class MediatorTest {
     public void serviceProviderReceivesSimpleQuestion() {
         var request = new Request(
                 Question.getQuestion(),
-                "Qual é o horário de atendimento?",
+                "Qual é o valor da limpeza de carros noturna?",
                 serviceProvider);
         var response = this.chatbot.handleRequest(request);
         assertEquals(
@@ -187,7 +189,7 @@ public class MediatorTest {
     public void softwareVendorReceivesSimpleQuestion() {
         var request = new Request(
                 Question.getQuestion(),
-                "Qual é o horário de atendimento?",
+                "Como eu acesso a seção de notificações?",
                 softwareVendor);
         var response = this.chatbot.handleRequest(request);
         assertEquals(
@@ -207,6 +209,60 @@ public class MediatorTest {
                 """
                         Atendente: A resposta da empresa Tecno-lebre é:
                         [Responde à questão].""",
+                response);
+    }
+
+    /* UpdateInformation */
+
+    @Test
+    public void centralReceivesUpdateInformationRequest() {
+        var request = new Request(
+                UpdateInformation.getUpdateInformation(),
+                "Gostaria de atualizar meu telefone para (12) 98765-4321.",
+                null);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Atendente: Seu cadastro foi atualizado.""",
+                response);
+    }
+
+    @Test
+    public void homeAppliancesManufacturerReceivesUpdateInformationRequest() {
+        var request = new Request(
+                UpdateInformation.getUpdateInformation(),
+                "Gostaria de me registrar a garantia do meu forno. Seguem as informações: [INFORMAÇÕES].",
+                homeAppliancesManufacturer);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Atendente: Seu cadastro foi atualizado.""",
+                response);
+    }
+
+    @Test
+    public void serviceProviderReceivesUpdateInformationRequest() {
+        var request = new Request(
+                UpdateInformation.getUpdateInformation(),
+                "Gostaria de atualizar meu endereço para Rua das Flores, 123, Boas Novas.",
+                serviceProvider);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Atendente: Seu cadastro foi atualizado.""",
+                response);
+    }
+
+    @Test
+    public void softwareVendorReceivesUpdateInformationRequest() {
+        var request = new Request(
+                UpdateInformation.getUpdateInformation(),
+                "Gostaria de atualizar minha senha para 123456.",
+                softwareVendor);
+        var response = this.chatbot.handleRequest(request);
+        assertEquals(
+                """
+                        Atendente: Seu cadastro foi atualizado.""",
                 response);
     }
 
