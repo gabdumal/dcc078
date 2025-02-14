@@ -11,12 +11,10 @@ import assignments.exporter.InventoryItem.InventoryItem;
 import assignments.exporter.InventoryItem.Pallet;
 import assignments.exporter.InventoryItem.Product;
 
+import java.util.stream.Collectors;
+
 public class HTMLExporter
         implements InventoryVisitor {
-
-    public String print(InventoryItem item) {
-        return "<ul>\n" + item.accept(this) + "</ul>\n";
-    }
 
     @Override
     public String printProduct(Product product) {
@@ -36,26 +34,29 @@ public class HTMLExporter
 
     @Override
     public String printBox(Box box) {
-        StringBuilder output = new StringBuilder();
 
-        output.append(String.format(
-                "{\"type\": \"Box\", \"color\": \"%s\", \"products\": [",
-                box.getColor()
-                   .replace("\"", "\\\"")
-        ));
+        String output = String.format(
+                """
+                        <li>
+                        <p>Box</p>
+                        <ul>
+                        <li>Color: %s</li>
+                        <li>Products:%s</li>
+                        </ul>
+                        </li>
+                        """,
+                box.getColor(),
+                box.getProducts()
+                   .stream()
+                   .map(this::print)
+                   .collect(Collectors.joining())
+        );
 
-        for (Product product : box.getProducts()) {
-            output.append(product.accept(this));
-            output.append(", ");
-        }
+        return output;
+    }
 
-        if (!box.getProducts()
-                .isEmpty()) {
-            output.delete(output.length() - 2, output.length()); // Remove trailing comma
-        }
-
-        output.append("]}");
-        return output.toString();
+    public String print(InventoryItem item) {
+        return "<ul>\n" + item.accept(this) + "</ul>\n";
     }
 
     @Override
