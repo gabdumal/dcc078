@@ -4,12 +4,87 @@
 left to right direction
 hide empty members
 
+package organization_package as "Organization" {
+
+    interface Organization {
+        String getName()
+        String receiveComplaint(String complaint)
+        String receiveQuestion(String question)
+        String receiveRefundRequest(String description)
+    }
+
+    class HomeAppliancesManufacturer implements Organization {
+        - {final} String name
+        + HomeAppliancesManufacturer(String name)
+        + String getName()
+        + String receiveComplaint(String complaint)
+        + String receiveQuestion(String question)
+        + String receiveRefundRequest(String description)
+    }
+
+    class ServiceProvider implements Organization {
+        - {final} String name
+        + ServiceProvider(String name)
+        + String getName()
+        + String receiveComplaint(String complaint)
+        + String receiveQuestion(String question)
+        + String receiveRefundRequest(String description)
+    }
+
+    class SoftwareVendor implements Organization {
+        - {final} String name
+        + SoftwareVendor(String name)
+        + String getName()
+        + String receiveComplaint(String complaint)
+        + String receiveQuestion(String question)
+        + String receiveRefundRequest(String description)
+    }
+
+}
+
 package request_package as "Request" {
 
     interface RequestType
 
-    class Request {
+    class Complaint implements RequestType {
+        - {static} {final} Complaint complaint
+        - Complaint()
+        + {static} Complaint getComplaint()
     }
+
+    class Question implements RequestType {
+        - {static} {final} Question question
+        - Question()
+        + {static} Question getQuestion()
+    }
+
+    class UpdateInformation implements RequestType {
+        - {static} {final} UpdateInformation updateInformation
+        - UpdateInformation()
+        + {static} UpdateInformation getUpdateInformation()
+    }
+
+    class Malfunctioning implements RequestType {
+        - {static} {final} Malfunctioning malfunctioning
+        - Malfunctioning()
+        + {static} Malfunctioning getMalfunctioning()
+    }
+
+    class Refund implements RequestType {
+        - {static} {final} Refund refund
+        - Refund()
+        + {static} Refund getRefund()
+    }
+
+    class Request {
+        - {final} String description
+        + Request(RequestType requestType, String description, Organization organization)
+        + String getDescription()
+        + Organization getOrganization()
+        + RequestType getType()
+    }
+    Request "*" --> "1" RequestType : has a type
+    Request "*" --> "0..1" Organization : is directed to
 
 }
 
@@ -43,17 +118,6 @@ package agent_package as "Agent" {
         + public Technician(Agent superiorAgent)
         # String getRole()
         # String respond(Request request)
-    }
-
-}
-
-package organization_package as "Organization" {
-
-    interface Organization {
-        String getName()
-        String receiveComplaint(String complaint)
-        String receiveQuestion(String question)
-        String receiveRefundRequest(String description)
     }
 
 }
