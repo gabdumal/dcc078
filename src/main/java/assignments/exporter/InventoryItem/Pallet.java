@@ -25,7 +25,7 @@ public class Pallet
 
     @Override
     public void accept(InventoryVisitor visitor) {
-        visitor.visitPallet(this);
+        visitor.printPallet(this);
     }
 
 }

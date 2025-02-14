@@ -15,6 +15,14 @@ public class CSVExporter
 
     @Override
     public String printProduct(Product product) {
+        return this.printProductHeader() + "\n" + this.printProductLine(product);
+    }
+
+    private String printProductHeader() {
+        return "Tipo,Nome,Peso,Preço";
+    }
+
+    private String printProductLine(Product product) {
         return String.format("Product,%s,%.2f,%.2f%n", product.getName(), product.getWeight(), product.getPrice());
     }
 

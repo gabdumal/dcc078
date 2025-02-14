@@ -25,7 +25,7 @@ public class Box
 
     @Override
     public void accept(InventoryVisitor visitor) {
-        visitor.visitBox(this);
+        visitor.printBox(this);
     }
 
 }

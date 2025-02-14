@@ -39,7 +39,7 @@ public class Product
 
     @Override
     public void accept(InventoryVisitor visitor) {
-        visitor.visitProduct(this);
+        visitor.printProduct(this);
     }
 
 }
